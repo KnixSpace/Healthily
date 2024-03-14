@@ -7,26 +7,23 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-@Document(collection = "doctors")
+import java.util.Date;
+
+@Document(collection = "appointments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Doctors {
+public class Appointment {
 
     @Id
     private ObjectId id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String email;
-    private String contactNumber;
-
-    private List<String> qualifications;
-
-    private List<TimeSlot> timeSlot;
+    private Date date;
+    private String time;
+    private ObjectId patientId;
+    private ObjectId doctorID;
+    private String title;
+    private String discription;
+    private Boolean status;
+    private ObjectId reportId;
 
 }
-
-
-

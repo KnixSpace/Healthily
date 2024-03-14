@@ -11,4 +11,5 @@ public class PatientsService {
     public long getCount(){
         return patientsRepository.count();
     }
+
 }
