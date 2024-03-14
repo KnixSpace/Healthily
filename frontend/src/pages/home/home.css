@@ -5,10 +5,11 @@
   /* height: auto; */
   height: 100vh;
   background-image: url("/landing.jpg");
+  background-size: cover;
+  /* background-attachment: fixed; */
   background-position-x: center;
   background-position-y: bottom;
   background-color: #01001f99;
-  background-size: cover;
   background-blend-mode: multiply;
   /* background-blend-mode: overlay; */
 }

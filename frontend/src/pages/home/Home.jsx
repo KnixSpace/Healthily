@@ -2,6 +2,7 @@ import CountUp from "react-countup";
 import Navbar from "../navbar/Navbar";
 import "./home.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [counts, setCounts] = useState([]);
   useEffect(() => {
@@ -28,16 +29,21 @@ const Home = () => {
             <section className="home-tagline">
               Transforming Healthcare Together: Where Wellness Meets Innovation.
             </section>
-            <button className="get-started-btn">Get Started</button>
+            <Link to={"/login"}>
+              <button className="get-started-btn">Get Started</button>
+            </Link>
             <section className="home-stats">
               <div className="home-stats-1">
-                <CountUp end={counts[0]+100} duration={1} />+<div>Patients</div>
+                <CountUp end={counts[0] + 100} duration={1} />+
+                <div>Patients</div>
               </div>
               <div className="home-stats-2">
-                <CountUp end={counts[1]+100} duration={1} />+<div>Doctors</div>
+                <CountUp end={counts[1] + 100} duration={1} />+
+                <div>Doctors</div>
               </div>
               <div className="home-stats-3">
-                <CountUp end={counts[2]+100} duration={1} />+<div>Appointments</div>
+                <CountUp end={counts[2] + 100} duration={1} />+
+                <div>Appointments</div>
               </div>
             </section>
           </section>
