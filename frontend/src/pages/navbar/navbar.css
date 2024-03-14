@@ -1,0 +1,15 @@
+.navbar-container{
+    display: flex;
+    width: 100%;
+    /* background-color: aquamarine; */
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 50px 0px 50px;
+    margin-bottom: 150px;
+    color: white;
+}
+
+.navbar-login {
+    font-size: 24px;
+    font-weight: 400;
+}
