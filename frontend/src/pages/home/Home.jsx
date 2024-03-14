@@ -6,11 +6,10 @@ const Home = () => {
   const [counts, setCounts] = useState([]);
   useEffect(() => {
     const getCount = async () => {
-      const data = await fetch("http://localhost:8080/hms/api/count");
+      const data = await fetch("http://localhost:8080/hms/api/home/count");
       const res = await data.json();
       console.log(res);
       setCounts([res, res, res]);
-    
     };
     getCount();
   }, []);
