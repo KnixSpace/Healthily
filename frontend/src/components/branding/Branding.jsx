@@ -1,17 +1,13 @@
 import logo from "/pills.png";
-import "./branding.css";
-import { NavLink} from "react-router-dom";
 const Branding = () => {
   return (
     <>
-      <NavLink to={"/"}>
-        <div className="branding-container" onClick={() => {}}>
-          <div className="branding-logo">
-            <img src={logo} alt="Healthhub logo" />
-          </div>
-          <div>Health Hub</div>
-        </div>
-      </NavLink>
+      <div className="flex gap-5 shrink-0 items-center">
+        <img src={logo} alt="health hub logo" className="w-8 sm:w-12" />
+        <span className="text-xl sm:text-2xl font-medium text-white">
+          Health Hub
+        </span>
+      </div>
     </>
   );
 };
