@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
       <div className="flex justify-between items-center px-8 pt-8 lg:px-[200px]">
-        <Branding />
+        <Branding logoColor={"text-white"}/>
         <span
           className="font-medium text-white text-xl md:text-2xl cursor-pointer"
           onClick={googleAuth}

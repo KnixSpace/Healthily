@@ -3,6 +3,7 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import Patient from "./pages/patient/Patient";
 
 function App() {
   const location = useLocation();
@@ -31,8 +32,9 @@ function App() {
   return (
     <>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/patient" element={<Patient user={user}/>}></Route>
       </Routes>
     </>
   );
