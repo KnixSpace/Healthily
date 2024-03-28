@@ -3,7 +3,7 @@ import dpic from "/user.png";
 const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
   return (
     <>
-      <div className="bg-white p-3 rounded-lg divide-y-2 mb-4">
+      <div className="border-[#605BFF] border p-3 rounded-lg divide-y-2 mb-4">
         <div className="flex gap-4 pb-3">
           <img className="size-12" src={dpic} alt="" />
           <div>
@@ -15,7 +15,9 @@ const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
           <div className="text-lg font-medium">Title : Ear checkup</div>
           <div className="flex items-center pt-3 gap-6">
             <div className="flex items-center gap-2">
-              <span className="material-icons-outlined text-[#605BFF]">event</span>
+              <span className="material-icons-outlined text-[#605BFF]">
+                event
+              </span>
               <span>12-03-2003</span>
             </div>
             <div className="flex items-center gap-2">

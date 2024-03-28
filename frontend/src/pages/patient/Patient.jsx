@@ -7,7 +7,7 @@ import Pdashboard from "./Pdashboard";
 const Patient = ({ user }) => {
   return (
     <>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-screen bg-[#f5f6f7]">
         <nav className="flex px-6 md:px-16 lg:px-[200px] py-6 md:py-8 justify-between items-center">
           <Branding logoColor={"text-black"} />
           <div className="flex gap-5 items-center">

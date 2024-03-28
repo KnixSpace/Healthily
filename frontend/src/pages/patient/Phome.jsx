@@ -1,10 +1,10 @@
-import Pappointment from "../../components/pappointment/Pappointment";
+import Pappointment from "../../components/patientComp/Pappointment";
 import Nodata from "../../components/NoData";
 
 const Phome = () => {
-  const data = "";
+  const data = "3";
   return (
-    <div className="bg-slate-300 rounded-xl p-4 h-full overflow-auto">
+    <div className="bg-white rounded-xl p-4 h-full overflow-auto">
       {data ? (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-4">
           {/* {Array.from({ length: 100 }, (_, i) => (
@@ -16,7 +16,7 @@ const Phome = () => {
           <Pappointment />
         </div>
       ) : (
-        <Nodata/>
+        <Nodata />
       )}
     </div>
   );
