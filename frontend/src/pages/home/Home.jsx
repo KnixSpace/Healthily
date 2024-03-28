@@ -42,15 +42,21 @@ const Home = () => {
       </section>
       <div className="flex justify-center py-6 my-8 divide-x divide-[#ababab] text-center bg-gradient-to-r from-white via-[#DFDEFF] to-white rounded-xl">
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
-          <div className="text-[#605BFF] md:text-4xl font-medium">1000+</div>
+          <div className="text-[#605BFF] md:text-4xl font-medium">
+            <CountUp end={1000} duration={1} />+
+          </div>
           <div className="md:text-2xl">Patient</div>
         </div>
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
-          <div className="text-[#605BFF] md:text-4xl font-medium">1050+</div>
+          <div className="text-[#605BFF] md:text-4xl font-medium">
+            <CountUp end={1000} duration={1} />+
+          </div>
           <div className="md:text-2xl">Doctor</div>
         </div>
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
-          <div className="text-[#605BFF] md:text-4xl font-medium">1000+</div>
+          <div className="text-[#605BFF] md:text-4xl font-medium">
+            <CountUp end={1000} duration={1} />+
+          </div>
           <div className="md:text-2xl">Appointments</div>
         </div>
       </div>
