@@ -5,6 +5,7 @@ import ProfileForm from "./ProfileForm";
 import Pdashboard from "./Pdashboard";
 
 const Patient = ({ user }) => {
+  const d = "";
   return (
     <>
       <div className="flex flex-col h-screen bg-[#f5f6f7]">
@@ -23,7 +24,7 @@ const Patient = ({ user }) => {
           </div>
         </nav>
         <section className="px-6 md:px-16 lg:px-[200px] py-2 flex-grow overflow-y-auto">
-          {user ? <Pdashboard /> : <ProfileForm />}
+          {d ? <Pdashboard /> : <ProfileForm />}
         </section>
         <footer>Footer</footer>
       </div>

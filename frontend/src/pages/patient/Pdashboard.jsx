@@ -49,7 +49,7 @@ const Pdashboard = () => {
             />
           </div>
         </div>
-        <div className="col-span-4 order-2 w-full h-full overflow-auto">
+        <div className="col-span-4 order-2 w-full h-full overflow-auto shadow-custom">
           <Outlet />
         </div>
       </div>

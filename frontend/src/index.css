@@ -13,3 +13,13 @@ a {
   text-decoration: none;
   color: #efeeff;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #605bff;
+  border-radius: 10px;
+}

@@ -1,6 +1,6 @@
 import dpic from "/user.png";
 
-const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
+const PAppointComp = ({ title, date, time, doctorName, doctorImg }) => {
   return (
     <>
       <div className="border-[#605BFF] border p-3 rounded-lg divide-y-2 mb-4">
@@ -8,7 +8,7 @@ const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
           <img className="size-12" src={dpic} alt="" />
           <div>
             <div className="font-medium ">Praharsh Patel</div>
-            <div className="font-medium text-slate-500">ENT</div>
+            <div className="font-medium text-slate-00">ENT</div>
           </div>
         </div>
         <div className="pt-3">
@@ -18,13 +18,13 @@ const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
               <span className="material-icons-outlined text-[#605BFF]">
                 event
               </span>
-              <span>12-03-2003</span>
+              <span className="text-slate-500">12-03-2003</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="material-icons-outlined text-[#605BFF]">
                 schedule
               </span>
-              <span>08:30 AM</span>
+              <span className="text-slate-500">08:30 AM</span>
             </div>
           </div>
         </div>
@@ -32,4 +32,4 @@ const Pappointment = ({ title, date, time, doctorName, doctorImg }) => {
     </>
   );
 };
-export default Pappointment;
+export default PAppointComp;
