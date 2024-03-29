@@ -16,6 +16,10 @@ public class PatientsService {
         return patientsRepository.count();
     }
 
+    public Patients checkPatient(String email){
+        return patientsRepository.findByEmail(email);
+    }
+
     public void SavePatientData(@RequestBody SavePatientDataDTO savePatientDataDTO){
         Patients patients = new Patients();
         patients.setEmail(savePatientDataDTO.getEmail());

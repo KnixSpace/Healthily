@@ -1,6 +1,8 @@
 package com.hms.backend.controllers;
 
+import com.hms.backend.dto.patientDTO.CheckPatientDTO;
 import com.hms.backend.dto.patientDTO.SavePatientDataDTO;
+import com.hms.backend.entities.Patients;
 import com.hms.backend.services.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PatientController {
     @Autowired
     PatientsService patientsService;
-    
+
+    @PostMapping("/check")
+    public ResponseEntity<String> checkPatient(@RequestBody CheckPatientDTO requestDTO) {
+        String email = requestDTO.getEmail();
+        Patients patient = patientsService.checkPatient(email);
+        if (patient != null) {
+            return ResponseEntity.ok("Patient with email " + email + " is available in the database");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Patient with email " + email + " is not found in the database");
+        }
+    }
+
     @PostMapping("/savePatient")
     public ResponseEntity<String> savePatient(@RequestBody SavePatientDataDTO savePatientDataDTO) {
         try {
