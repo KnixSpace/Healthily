@@ -4,7 +4,8 @@ import "./patient.css";
 import Select from "../../components/formComp/Select";
 import Field from "../../components/formComp/Field";
 import Radio from "../../components/formComp/Radio";
-const ProfileForm = () => {
+
+const ProfileForm = ({ user, checkPatient }) => {
   const [aadharNumber, setAadharNumber] = useState("");
   const handleChange = (e) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -30,6 +31,32 @@ const ProfileForm = () => {
     { value: "rajeshthan", label: "Rajeshthan" },
   ];
 
+  const [userProfile, setUserProfile] = useState(null);
+
+  const onSubmit = (data) => {
+    const profileData = { ...data, email: user?.email };
+    setUserProfile(profileData);
+
+    fetch("http://localhost:8080/hms/api/patient/savePatient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Patient data saved successfully");
+          checkPatient(user?.email);
+        } else {
+          console.error("Error saving patient data:", response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error saving patient data:", error);
+      });
+  };
+
   return (
     <>
       <div className="text-xl md:text-2xl font-medium pb-4">
@@ -37,7 +64,7 @@ const ProfileForm = () => {
       </div>
       <form
         className="grid grid-cols-1 xl:grid-cols-3 gap-x-20 gap-y-12 my-8"
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="xl:order-1">
           <Field
@@ -183,7 +210,7 @@ const ProfileForm = () => {
               <div>
                 <Radio
                   name="+ve"
-                  group="blood-group"
+                  group="bloodGroup"
                   label="+ve"
                   register={register}
                   value="+ve"
@@ -191,7 +218,7 @@ const ProfileForm = () => {
                 />
                 <Radio
                   name="-ve"
-                  group="blood-group"
+                  group="bloodGroup"
                   label="-ve"
                   register={register}
                   value="-ve"

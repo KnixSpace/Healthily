@@ -3,9 +3,43 @@ import Branding from "../../components/branding/Branding";
 import profile from "/user.png";
 import ProfileForm from "./ProfileForm";
 import Pdashboard from "./Pdashboard";
+import { setPatientPresence } from "./PatientPresentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Patient = ({ user }) => {
-  const d = "";
+  // console.log(user?.email);
+  const { isPatientPresent } = useSelector((state) => state.patientPresent);
+  const dispatch = useDispatch();
+  const checkPatient = async (email) => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/hms/api/patient/check",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      if (response.ok) {
+        dispatch(setPatientPresence(true));
+      } else {
+        console.error("Error checking patient:", response.status);
+      }
+    } catch (error) {
+      console.error("Error checking patient:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.email) {
+      checkPatient(user?.email);
+    }
+  }, [user]);
+
   return (
     <>
       <div className="flex flex-col h-screen bg-[#f5f6f7]">
@@ -24,7 +58,11 @@ const Patient = ({ user }) => {
           </div>
         </nav>
         <section className="px-6 md:px-16 lg:px-[200px] py-2 flex-grow overflow-y-auto">
-          {d ? <Pdashboard /> : <ProfileForm />}
+          {isPatientPresent ? (
+            <Pdashboard />
+          ) : (
+            <ProfileForm user={user} checkPatient={checkPatient} />
+          )}
         </section>
         <footer>Footer</footer>
       </div>

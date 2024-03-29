@@ -23,8 +23,8 @@ function App() {
         })
         .then((data) => {
           setUser(data);
-          console.log(data);
-          console.log("rol" + data?.role);
+          // console.log(data);
+          // console.log("rol" + data?.role);
         })
         .catch((err) => {
           console.error("Fetch error", err);
