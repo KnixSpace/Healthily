@@ -12,16 +12,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patients {
-    @Id
-    private ObjectId id;
     private String firstName;
     private String middleName;
     private String lastName;
-    private String email;
-    private String birth;
     private String gender;
-    private String contactNumber;
-    private String aadharCard;
-    private Address address;
+    private String email;
+    private String phoneNumber;
+    private String aadhar;
+    private String birthDate;
     private String bloodGroup;
+    private Address address;
 }
