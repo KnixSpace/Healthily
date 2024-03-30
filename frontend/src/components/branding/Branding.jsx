@@ -7,7 +7,7 @@ const Branding = ({ logoColor }) => {
         <div className="flex gap-2 md:gap-5 items-center">
           <img src={logo} alt="health hub logo" className="w-8 sm:w-12" />
           <span className={" shrink-0 text-lg sm:text-2xl font-medium " + logoColor}>
-            Health Hub
+            Healthily
           </span>
         </div>
       </Link>
