@@ -15,6 +15,4 @@ public class DoctorDTO {
     private String day;
     private List<String> clientKeyWords;
     private String email;
-
-
 }

@@ -13,20 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctors {
-
-    @Id
-    private ObjectId id;
+    private String profileImage;
     private String firstName;
     private String middleName;
     private String lastName;
     private String email;
     private String contactNumber;
-
     private List<String> qualifications;
-
     private List<TimeSlot> timeSlot;
-
 }
-
-
-

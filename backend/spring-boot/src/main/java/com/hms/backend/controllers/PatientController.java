@@ -10,15 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/hms/api/patient")
+@RequestMapping("/healthily/api/patient")
 @CrossOrigin(origins = "*")
 public class PatientController {
     @Autowired
     PatientsService patientsService;
 
     @PostMapping("/check")
-    public ResponseEntity<String> checkPatient(@RequestBody CheckPatientDTO requestDTO) {
-        String email = requestDTO.getEmail();
+    public ResponseEntity<String> checkPatient(@RequestBody CheckPatientDTO checkPatientDTO) {
+        String email = checkPatientDTO.getEmail();
         Patients patient = patientsService.checkPatient(email);
         if (patient != null) {
             return ResponseEntity.ok("Patient with email " + email + " is available in the database");

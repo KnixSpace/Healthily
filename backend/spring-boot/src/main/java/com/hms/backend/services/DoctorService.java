@@ -10,7 +10,6 @@ public class DoctorService {
     private DoctorRepository doctorRepository;
 
     public Long getCount(){
-
         return doctorRepository.count();
     }
 }
