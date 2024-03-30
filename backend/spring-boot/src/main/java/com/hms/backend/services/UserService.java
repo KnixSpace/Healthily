@@ -19,12 +19,17 @@ import java.nio.charset.StandardCharsets;
 public class UserService {
     @Autowired
     UsersRepository userRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
     public void saveUser(Users user){
         userRepository.save(user);
     }
 
-    @Autowired
-    private JavaMailSender mailSender;
+    public Users findUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public void sendConfirmationMail(String doctorEmail){
         try {
             Resource resource = new ClassPathResource("mail-templates/account-confirmation.html");

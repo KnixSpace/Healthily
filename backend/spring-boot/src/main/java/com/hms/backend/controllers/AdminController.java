@@ -26,6 +26,13 @@ public class AdminController {
     @PostMapping("/addDoctor")
     public ResponseEntity<String> addDoctor(@RequestBody AddDoctorDTO addDoctorDTO) {
         String doctorEmail = addDoctorDTO.getEmail();
+
+        Users existingUser = userService.findUserByEmail(doctorEmail);
+        if(existingUser!=null){
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("User with email "+ doctorEmail + " already exists");
+        }
+        
         userService.sendConfirmationMail(doctorEmail);
         Users user = new Users();
         user.setEmail(doctorEmail);

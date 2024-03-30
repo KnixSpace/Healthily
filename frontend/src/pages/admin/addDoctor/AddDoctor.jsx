@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const AddDoctor = () => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSnackbar = () => {
     setOpen(true);
@@ -33,10 +34,15 @@ const AddDoctor = () => {
     })
       .then((response) => {
         if (!response.ok) {
+          setError(true);
+          handleSnackbar();
           throw new Error("Network response was not ok");
         }
         handleSnackbar();
-        return response;
+        return response.text();
+      })
+      .then((data) => {
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -82,8 +88,10 @@ const AddDoctor = () => {
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert severity="success">
-          Doctor Added and Email Sent Successfully.
+        <Alert severity={error ? "error" : "success"}>
+          {error
+            ? "Doctor with this email already exists!"
+            : "Doctor Added and Email Sent Successfully."}
         </Alert>
       </Snackbar>
     </div>
