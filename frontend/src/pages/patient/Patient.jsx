@@ -1,11 +1,10 @@
-import { Outlet } from "react-router-dom";
-import Branding from "../../components/branding/Branding";
-import profile from "/user.png";
-import ProfileForm from "./ProfileForm";
-import Pdashboard from "./Pdashboard";
+import ProfileForm from "./form/ProfileForm";
 import { setPatientPresence } from "./PatientPresentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import Navbar from "../navbar/Navbar";
+import Container from "../../components/Container";
+import Dashboard from "../../components/Dashboard";
 
 const Patient = ({ user }) => {
   // console.log(user?.email);
@@ -43,27 +42,18 @@ const Patient = ({ user }) => {
   return (
     <>
       <div className="flex flex-col h-screen bg-[#f5f6f7]">
-        <nav className="flex px-6 md:px-16 lg:px-[200px] py-6 md:py-8 justify-between items-center">
-          <Branding logoColor={"text-black"} />
-          <div className="flex gap-5 items-center">
-            <div className="hidden sm:block">
-              <div className="font-medium  md:text-lg">Krupal Patel</div>
-              <div className="text-[#808080] font-medium">Patient</div>
-            </div>
-            <img
-              src={profile}
-              alt="user profile image"
-              className="w-8 sm:w-12"
-            />
-          </div>
-        </nav>
-        <section className="px-6 md:px-16 lg:px-[200px] py-2 flex-grow overflow-y-auto">
-          {isPatientPresent ? (
-            <Pdashboard />
-          ) : (
-            <ProfileForm user={user} checkPatient={checkPatient} />
-          )}
-        </section>
+        <Navbar user={user} logoColor={"text-black"} />
+        <Container
+          OrgComp={
+            <>
+              {isPatientPresent ? (
+                <Dashboard role={user?.role} />
+              ) : (
+                <ProfileForm user={user} checkPatient={checkPatient} />
+              )}
+            </>
+          }
+        />
         <footer>Footer</footer>
       </div>
     </>

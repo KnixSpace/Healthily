@@ -1,6 +1,6 @@
 import dimage from "/user.png";
-import TimeSelect from "../../components/formComp/TimeSelect";
-import PDoctorComp from "../../components/patientComp/PDoctorComp";
+import TimeSelect from "../../../components/formComp/TimeSelect";
+import PDoctorComp from "../../../components/patientComp/PDoctorComp";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
@@ -120,9 +120,7 @@ const NewAppoint = () => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         message="Success"
       >
-        <Alert severity="success">
-          Appointment Booked
-        </Alert>
+        <Alert severity="success">Appointment Booked</Alert>
       </Snackbar>
     </div>
   );

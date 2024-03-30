@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import "./patient.css";
-import Select from "../../components/formComp/Select";
-import Field from "../../components/formComp/Field";
-import Radio from "../../components/formComp/Radio";
+import Select from "../../../components/formComp/Select";
+import Field from "../../../components/formComp/Field";
+import Radio from "../../../components/formComp/Radio";
+import "../patient.css";
 
 const ProfileForm = ({ user, checkPatient }) => {
   const [aadharNumber, setAadharNumber] = useState("");
