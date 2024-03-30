@@ -1,8 +1,8 @@
-import ProfileForm from "./form/ProfileForm";
+import ProfileForm from "./profileForm/ProfileForm";
 import { setPatientPresence } from "./PatientPresentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import Container from "../../components/Container";
 import Dashboard from "../../components/Dashboard";
 

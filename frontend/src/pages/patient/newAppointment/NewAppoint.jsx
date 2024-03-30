@@ -1,5 +1,5 @@
 import dimage from "/user.png";
-import TimeSelect from "../../../components/formComp/TimeSelect";
+import TimeSelect from "../../../components/form/TimeSelect";
 import PDoctorComp from "../../../components/patientComp/PDoctorComp";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";

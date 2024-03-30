@@ -1,4 +1,4 @@
-import "./formComp.css";
+import "./form.css";
 const Radio = ({ name, group, label, register, value, requiredMessage }) => {
   return (
     <div>

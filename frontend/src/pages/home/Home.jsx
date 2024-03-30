@@ -3,7 +3,7 @@ import { openPage } from "../register/RegisterSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Register from "../register/Register";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 const Home = () => {
   const dispatch = useDispatch();
   const [counts, setCounts] = useState([]);

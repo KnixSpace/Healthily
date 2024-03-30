@@ -1,6 +1,6 @@
 import Container from "../../components/Container";
 import Dashboard from "../../components/Dashboard";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 
 const Admin = ({ user }) => {
   return (

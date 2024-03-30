@@ -1,5 +1,5 @@
 import profile from "/user.png";
-import Branding from "../../components/branding/Branding";
+import Branding from "../branding/Branding";
 const Navbar = ({ user, logoColor }) => {
   const googleAuth = () => {
     window.open("http://localhost:3000/auth/api/login", "_self");
