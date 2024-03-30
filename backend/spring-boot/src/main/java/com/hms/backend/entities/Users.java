@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
-    @Id
-    private ObjectId id;
+
     private String email;
     private String role;
 }
