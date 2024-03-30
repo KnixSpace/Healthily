@@ -30,7 +30,7 @@ const Register = () => {
           close
         </span>
         <img className="w-16" src={logo} alt="health hub logo" />
-        <span className="text-2xl font-medium mt-2">Health Hub</span>
+        <span className="text-2xl font-medium mt-2">Healthily</span>
         <span className="text-lg">Building a Healthier Tomorrow, Today</span>
         <span className="mt-6 text-xl">Register with us</span>
         <button className="flex gap-5 items-center py-2 px-4 mt-[50px] border-2 border-[#605BFF] bg-[#DFDEFF] rounded-lg">
