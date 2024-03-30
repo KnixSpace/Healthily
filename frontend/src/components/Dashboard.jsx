@@ -1,0 +1,44 @@
+import { Outlet } from "react-router-dom";
+import Calendar from "./Calender";
+import LinkButton from "./LinkButton";
+
+const Dashboard = ({ role }) => {
+  return (
+    <div className="grid grid-cols-1 2xl:grid-cols-5 gap-x-12 gap-y-8 h-full">
+      <div className="order-1 hidden 2xl:block divide-y-2 divide-[#605BFF]">
+        <div className="flex flex-col gap-3 mb-5">
+          {role === "PATIENT" ? (
+            <>
+              <LinkButton
+                to={"new"}
+                icon={"add"}
+                name={"New Appointment"}
+                bg={"bg-[#DFDEFF]"}
+              />
+              <LinkButton to={""} icon={"home"} name={"Home"} />
+              <LinkButton
+                to={"appointments"}
+                icon={"description"}
+                name={"Appointments"}
+              />
+              <LinkButton to={"reports"} icon={"fact_check"} name={"Reports"} />
+            </>
+          ) : role === "DOCTOR" ? (
+            ""
+          ) : role === "ADMIN" ? (
+            ""
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-full">
+          <Calendar onDateSelect={() => {}} />
+        </div>
+      </div>
+      <div className="order-2 col-span-4 w-full h-full shadow-custom overflow-auto bg-white rounded-xl ">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+export default Dashboard;
