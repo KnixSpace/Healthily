@@ -13,7 +13,7 @@ const Patient = ({ user }) => {
   const checkPatient = async (email) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/hms/api/patient/check",
+        "http://localhost:8080/healthily/api/patient/check",
         {
           method: "POST",
           headers: {

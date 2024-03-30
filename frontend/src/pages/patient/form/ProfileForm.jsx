@@ -37,7 +37,7 @@ const ProfileForm = ({ user, checkPatient }) => {
     const profileData = { ...data, email: user?.email };
     setUserProfile(profileData);
 
-    fetch("http://localhost:8080/hms/api/patient/savePatient", {
+    fetch("http://localhost:8080/healthily/api/patient/savePatient", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
