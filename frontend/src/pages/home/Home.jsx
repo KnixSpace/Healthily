@@ -20,7 +20,7 @@ const Home = () => {
     <>
       <Register />
       <section className="flex flex-col h-[500px] sm:h-[700px] bg-hero bg-[#01001f80] bg-blend-overlay bg-no-repeat  bg-bottom ">
-        <Navbar />
+        <Navbar logoColor={"text-white"} />
         <section className="flex flex-col justify-center grow px-8 lg:px-[200px] text-white">
           <div className="text-2xl  md:text-5xl md:leading-t font-semibold mb-4">
             Empowering Health: Your Comprehensive <br /> E-Healthcare Solution

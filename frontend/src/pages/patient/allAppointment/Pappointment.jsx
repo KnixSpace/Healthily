@@ -8,13 +8,13 @@ const Pappointment = () => {
   };
   return (
     <>
-      <div className="bg-white rounded-xl p-4 h-full overflow-auto">
+      <div className="h-full overflow-auto">
         <div className="text-center p-2 mb-2 text-2xl text-[#605BFF] font-medium border-b-2">
-          Upcoming Appointments
+          Appointments
         </div>
         <input
           type="text"
-          className="mt-2 w-full rounded p-2  outline outline-1 outline-slate-300 focus:outline-[#605BFF] focus:outline-2 focus:bg-[#EFEEFF]"
+          className="mt-2 w-full rounded p-2  border border-slate-300 focus:outline-[#605BFF] focus:outline-2 focus:bg-[#EFEEFF]"
           placeholder="Search appointments..."
           value={searchQuery}
           onChange={handleSearch}

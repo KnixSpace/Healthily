@@ -4,7 +4,7 @@ import Nodata from "../../../components/NoData";
 const Phome = () => {
   const data = "3";
   return (
-    <div className="p-4 h-full overflow-auto">
+    <div className="h-full overflow-auto">
       {data ? (
         <>
           <div className="text-center p-2 mb-2 text-2xl text-[#605BFF] font-medium border-b-2">

@@ -39,7 +39,7 @@ const NewAppoint = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 h-full overflow-auto">
+    <div className="h-full overflow-auto">
       <div className="text-center p-2 mb-2 text-2xl text-[#605BFF] font-medium border-b-2">
         New Appointment
       </div>
