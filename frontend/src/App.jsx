@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Patient from "./pages/patient/Patient";
 import Phome from "./pages/patient/home/Phome";
 import NewAppoint from "./pages/patient/newAppointment/NewAppoint";
-import Pappointment from "./pages/patient/allAppointment/Pappointment";
 import Admin from "./pages/admin/Admin";
 import AddDoctor from "./pages/admin/addDoctor/AddDoctor";
+import AllAppointments from "./pages/allAppointments/AllAppointments";
 
 function App() {
   const location = useLocation();
@@ -69,7 +69,10 @@ function App() {
         >
           <Route path="" element={<Phome />} />
           <Route path="new" element={<NewAppoint />} />
-          <Route path="appointments" element={<Pappointment />} />
+          <Route
+            path="appointments"
+            element={<AllAppointments user={user} />}
+          />
         </Route>
         <Route
           path="/doctor"
@@ -88,6 +91,10 @@ function App() {
           }
         >
           <Route path="addDoctor" element={<AddDoctor />} />
+          <Route
+            path="appointments"
+            element={<AllAppointments user={user} />}
+          />
         </Route>
       </Routes>
     </>
