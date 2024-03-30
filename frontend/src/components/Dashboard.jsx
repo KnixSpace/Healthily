@@ -26,7 +26,31 @@ const Dashboard = ({ role }) => {
           ) : role === "DOCTOR" ? (
             ""
           ) : role === "ADMIN" ? (
-            ""
+            <>
+              <LinkButton
+                to={"addDoctor"}
+                icon={"add"}
+                name={"Add Doctor"}
+                bg={"bg-[#DFDEFF]"}
+              />
+              <LinkButton to={""} icon={"home"} name={"Home"} />
+              <LinkButton
+                to={"appointments"}
+                icon={"description"}
+                name={"Appointments"}
+              />
+              <LinkButton to={"reports"} icon={"fact_check"} name={"Reports"} />{" "}
+              <LinkButton
+                to={"doctors"}
+                icon={"stethoscope"}
+                name={"Doctors"}
+              />
+              <LinkButton
+                to={"patients"}
+                icon={"patient_list"}
+                name={"Patients"}
+              />
+            </>
           ) : (
             ""
           )}
@@ -35,7 +59,7 @@ const Dashboard = ({ role }) => {
           <Calendar onDateSelect={() => {}} />
         </div>
       </div>
-      <div className="order-2 col-span-4 w-full h-full shadow-custom overflow-auto bg-white rounded-xl ">
+      <div className="order-2 col-span-4 w-full h-full px-5 py-4 shadow-custom overflow-auto bg-white rounded-xl ">
         <Outlet />
       </div>
     </div>

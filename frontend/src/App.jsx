@@ -1,10 +1,12 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home/Home";
-import Register from "./pages/register/Register";
 import { useEffect, useState } from "react";
 import Patient from "./pages/patient/Patient";
-import Phome from "./pages/patient/Phome";
-import NewAppoint from "./pages/patient/NewAppoint";
+import Phome from "./pages/patient/home/Phome";
+import NewAppoint from "./pages/patient/newAppointment/NewAppoint";
+import Pappointment from "./pages/patient/allAppointment/Pappointment";
+import Admin from "./pages/admin/Admin";
+import AddDoctor from "./pages/admin/addDoctor/AddDoctor";
 
 function App() {
   const location = useLocation();
@@ -67,6 +69,7 @@ function App() {
         >
           <Route path="" element={<Phome />} />
           <Route path="new" element={<NewAppoint />} />
+          <Route path="appointments" element={<Pappointment />} />
         </Route>
         <Route
           path="/doctor"
@@ -80,10 +83,12 @@ function App() {
           path="/admin"
           element={
             <PrivateRoute role="ADMIN">
-              {/* Add Admin component and routes */}
+              <Admin user={user} />
             </PrivateRoute>
           }
-        />
+        >
+          <Route path="addDoctor" element={<AddDoctor />} />
+        </Route>
       </Routes>
     </>
   );
