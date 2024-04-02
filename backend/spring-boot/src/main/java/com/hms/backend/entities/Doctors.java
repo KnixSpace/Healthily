@@ -8,17 +8,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Map;
+
 @Document(collection = "doctors")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctors {
-    private String profileImage;
+    private String email;
     private String firstName;
     private String middleName;
     private String lastName;
-    private String email;
+    private String gender;
+    private String specializations;
     private String contactNumber;
-    private List<String> qualifications;
-    private List<TimeSlot> timeSlot;
+    private String aadhar;
+    private List<Map<String,List<String>>> timeSlots;
 }

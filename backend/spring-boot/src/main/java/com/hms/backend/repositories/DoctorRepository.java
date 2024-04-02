@@ -5,4 +5,5 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface DoctorRepository extends MongoRepository<Doctors, String> {
+    Doctors findByEmail(String Email);
 }
