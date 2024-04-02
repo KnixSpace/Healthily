@@ -15,6 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctors {
+    private String profileImg;
     private String email;
     private String firstName;
     private String middleName;
