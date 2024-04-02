@@ -20,7 +20,7 @@ public class Doctors {
     private String middleName;
     private String lastName;
     private String gender;
-    private String specializations;
+    private String specialization;
     private String contactNumber;
     private String aadhar;
     private List<Map<String,List<String>>> timeSlots;
