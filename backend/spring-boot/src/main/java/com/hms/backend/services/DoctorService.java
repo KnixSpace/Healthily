@@ -15,5 +15,9 @@ public class DoctorService {
     public Doctors checkDoc(String email){
         return doctorRepository.findByEmail(email);
     }
+    public void saveDoc(Doctors doctors){
+        doctorRepository.save(doctors);
+    }
+
 
 }

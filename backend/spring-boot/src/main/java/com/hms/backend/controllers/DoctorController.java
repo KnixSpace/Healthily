@@ -27,4 +27,9 @@ public class DoctorController {
                     .body("Doctor with email " + email + " is not found in the database");
         }
     }
+    @PostMapping("/saveDoctor")
+    public ResponseEntity<String> saveDoctor(@RequestBody Doctors doctors){
+        doctorService.saveDoc(doctors);
+        return ResponseEntity.ok("Okay");
+    }
 }
