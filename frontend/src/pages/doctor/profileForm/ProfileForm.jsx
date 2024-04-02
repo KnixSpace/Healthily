@@ -31,6 +31,7 @@ const ProfileForm = ({ user, checkDoctor }) => {
     );
 
     const profileData = {
+      profileImg: user?.image,
       email: user?.email,
       ...data,
       timeSlots: formattedTimeSlots,

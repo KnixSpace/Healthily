@@ -48,7 +48,7 @@ const Doctor = ({ user }) => {
               {isDoctorPresent ? (
                 <Dashboard role={user?.role} />
               ) : (
-                <ProfileForm user={user} />
+                <ProfileForm user={user} checkDoctor={checkDoctor} />
               )}
             </>
           }
