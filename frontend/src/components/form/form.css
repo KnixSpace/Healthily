@@ -16,6 +16,7 @@
   height: 16px; /* Size of the radio button */
   border-radius: 4px;
   background-color: #efeeff;
+  border:2px solid #605bff;
 }
 
 input[type="radio"]:checked + .radio-label:before {

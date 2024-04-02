@@ -34,8 +34,9 @@ const AddDoctor = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          setError(true);
+         
           handleSnackbar();
+          setError(true);
           throw new Error("Network response was not ok");
         }
         handleSnackbar();

@@ -11,20 +11,18 @@ import {
   isSameDay,
   isToday,
 } from "date-fns";
+import { useDispatch } from "react-redux";
+import { setDate } from "./CalendarSlice";
 
-const Calendar = ({ onDateSelect }) => {
+const Calendar = () => {
+  const dispatch = useDispatch();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-
-  useEffect(() => {
-    const formattedDate = format(currentDate, "yyyy-MM-dd");
-    onDateSelect(formattedDate); // Send current date by default
-  }, [onDateSelect, currentDate]);
 
   const onDateClick = (day) => {
     setSelectedDate(day);
     const formattedDate = format(day, "yyyy-MM-dd");
-    onDateSelect(formattedDate); // Send selected date
+    dispatch(setDate(formattedDate));
   };
 
   const renderHeader = () => {
@@ -33,7 +31,9 @@ const Calendar = ({ onDateSelect }) => {
         <button onClick={prevMonth} className="text-lg">
           <span className="material-icons-round">chevron_left</span>
         </button>
-        <div className="text-lg font-medium text-[#605BFF]">{format(currentDate, "MMMM yyyy")}</div>
+        <div className="text-lg font-medium text-[#605BFF]">
+          {format(currentDate, "MMMM yyyy")}
+        </div>
         <button onClick={nextMonth} className="text-lg">
           <span className="material-icons-round">chevron_right</span>
         </button>

@@ -8,7 +8,7 @@ const Select = ({
 }) => {
   return (
     <div>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="font-medium">{label}</label>
       <div>
         <select
           name={name}

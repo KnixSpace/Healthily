@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Calendar from "./Calender";
+import Calendar from "./calander/Calender";
 import LinkButton from "./LinkButton";
 
 const Dashboard = ({ role }) => {
@@ -21,10 +21,16 @@ const Dashboard = ({ role }) => {
                 icon={"description"}
                 name={"Appointments"}
               />
-              <LinkButton to={"reports"} icon={"fact_check"} name={"Reports"} />
             </>
           ) : role === "DOCTOR" ? (
-            ""
+            <>
+              <LinkButton to={""} icon={"home"} name={"Home"} />
+              <LinkButton
+                to={"appointments"}
+                icon={"description"}
+                name={"Appointments"}
+              />
+            </>
           ) : role === "ADMIN" ? (
             <>
               <LinkButton
@@ -39,7 +45,6 @@ const Dashboard = ({ role }) => {
                 icon={"description"}
                 name={"Appointments"}
               />
-              <LinkButton to={"reports"} icon={"fact_check"} name={"Reports"} />{" "}
               <LinkButton
                 to={"doctors"}
                 icon={"stethoscope"}
@@ -56,7 +61,7 @@ const Dashboard = ({ role }) => {
           )}
         </div>
         <div className="w-full">
-          <Calendar onDateSelect={() => {}} />
+          <Calendar />
         </div>
       </div>
       <div className="order-2 col-span-4 w-full h-full px-5 py-4 shadow-custom overflow-auto bg-white rounded-xl ">
