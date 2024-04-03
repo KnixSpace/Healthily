@@ -44,9 +44,11 @@ public class PatientController {
         }
     }
     @PostMapping("/allAppointment")
-    public List<Appointment> getAllAppointmentByPatient(@RequestBody AppointmentDTO appointmentDTO){
+    public List<AppointmentDTO> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
         String patientEmail = appointmentDTO.getPatientEmail();
-        return patientsService.allAppointment(patientEmail);
+        List<Appointment> appointments = patientsService.allAppointment(patientEmail);
+        List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
+        return appointmentDTOs;
     }
     @PostMapping("/upComingAppointment")
     public List<AppointmentDTO> upComingAppointment(@RequestBody AppointmentDTO appointmentDTO){

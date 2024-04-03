@@ -63,10 +63,12 @@ public class AdminController {
         return appointmentDTOs;
     }
 
-    @PostMapping("/appointmentBydate")
-    private List<Appointment> appointmentByDate(@RequestBody AppointmentDTO appointmentDTO){
+    @PostMapping("/appointmentByDate")
+    private List<AppointmentDTO> appointmentByDate(@RequestBody AppointmentDTO appointmentDTO){
         String date = appointmentDTO.getDate();
-        return adminService.appointmentByDate(date);
+        List<Appointment> appointments = adminService.appointmentByDate(date);
+        List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
+        return appointmentDTOs;
     }
 
     private static List<AppointmentDTO> getAppointmentDTOS(List<Appointment> appointments) {

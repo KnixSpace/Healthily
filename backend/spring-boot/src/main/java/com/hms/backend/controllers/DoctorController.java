@@ -54,9 +54,11 @@ public class DoctorController {
     }
 
     @PostMapping("/allAppointment")
-    public List<Appointment> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
+    public List<AppointmentDTO> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
         String doctorEmail = appointmentDTO.getDoctorEmail();
-        return doctorService.allAppointment(doctorEmail);
+        List<Appointment> appointments = doctorService.allAppointment(doctorEmail);
+        List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
+        return appointmentDTOs;
     }
     @PostMapping("/upComingAppointment")
     public List<AppointmentDTO> upComingAppointment(@RequestBody AppointmentDTO appointmentDTO) {
