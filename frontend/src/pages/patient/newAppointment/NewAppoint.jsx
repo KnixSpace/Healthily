@@ -1,4 +1,3 @@
-import dimage from "/user.png";
 import TimeSelect from "../../../components/form/TimeSelect";
 import PDoctorComp from "../../../components/patientComp/PDoctorComp";
 import Snackbar from "@mui/material/Snackbar";
@@ -6,8 +5,11 @@ import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const NewAppoint = () => {
+const NewAppoint = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const [availableDoctor, setAvailableDoctor] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+
   const handleSnackbar = () => {
     setOpen(true);
   };
@@ -19,8 +21,6 @@ const NewAppoint = () => {
     setOpen(false);
   };
 
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
-  // console.log(selectedDoctor);
   const {
     register,
     handleSubmit,
@@ -29,12 +29,72 @@ const NewAppoint = () => {
 
   const onSubmit = (data) => {
     if (selectedDoctor) {
-      console.log("Appoint not available");
-      handleSnackbar();
+      const body = {
+        ...data,
+        doctorEmail: selectedDoctor?.email,
+        doctorName: selectedDoctor?.dname,
+        patientEmail: user?.email,
+        patientName: user?.name,
+        specialization: selectedDoctor?.dqualify,
+      };
+      console.log(body);
+
+      fetch("http://localhost:8080/healthily/api/appointment/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => {
+          if (response.ok) {
+            handleSnackbar();
+            console.log("Appointment booked successfully!");
+          } else {
+            console.error("Error booking appointment.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error", error);
+        });
     } else {
-      //fetch the available doctor from backend
-      //set doctor
-      console.log(data);
+      const date = new Date(data.date);
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const body = {
+        day: days[date.getDay()],
+        ...data,
+      };
+      console.log(body);
+
+      fetch("http://localhost:8080/healthily/api/doctor/availability", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            console.error("Error checking availability.");
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          setAvailableDoctor(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   };
 
@@ -87,23 +147,41 @@ const NewAppoint = () => {
               )}
             </div>
             <TimeSelect register={register} errors={errors} />
-            <div className="h-[200px] bg-[#EFEEFF] p-3 overflow-auto grid grid-cols-1 md:grid-cols-1 gap-4">
-              {Array.from({ length: 100 }, (_, i) => (
-                <PDoctorComp
-                  onClick={setSelectedDoctor}
-                  dname="Praharsh"
-                  dqualify="M.D"
-                  key={i}
-                />
-              ))}
-            </div>
-            <div className="my-2 flex gap-4 bg-white p-2 rounded-md border border-[#605BFF]">
-              <img className="size-12" src={dimage} alt="" />
-              <div>
-                <div className="font-medium">Praharsh</div>
-                <div className="text-slate-400">M.D</div>
-              </div>
-            </div>
+            {availableDoctor.length > 0 ? (
+              <>
+                <div className="h-[200px] bg-[#EFEEFF] p-3 overflow-auto grid grid-cols-1 md:grid-cols-1 gap-4">
+                  {availableDoctor.map((doctor, index) => (
+                    <PDoctorComp
+                      onClick={setSelectedDoctor}
+                      dname={doctor?.name}
+                      dqualify={doctor?.specialization}
+                      dimage={doctor?.image}
+                      email={doctor?.email}
+                      key={index}
+                    />
+                  ))}
+                </div>
+                {selectedDoctor ? (
+                  <div className="my-2 flex gap-4 bg-white p-2 rounded-md border border-[#605BFF]">
+                    <img
+                      className="size-12 border-[#605bff] border rounded-full"
+                      src={selectedDoctor?.dimage}
+                      alt=""
+                    />
+                    <div>
+                      <div className="font-medium">{selectedDoctor?.dname}</div>
+                      <div className="text-slate-400">
+                        {selectedDoctor?.dqualify}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </>
+            ) : (
+              ""
+            )}
             <button
               type="submit"
               className="my-4 bg-[#605BFF] text-white p-2 rounded-md"

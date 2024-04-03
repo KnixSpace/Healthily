@@ -10,7 +10,7 @@ const AppointmentDetails = ({ appointmentID, onBackToAppointments }) => {
         >
           keyboard_backspace
         </span>
-        <Text label={"Date"} value={"122"} />
+        <Text label={"Date"} value={appointmentID} />
         <Text label={"Time"} value={"122"} />
         <Text label={"Status"} value={"122"} />
         <Text label={"Title"} value={"122"} />

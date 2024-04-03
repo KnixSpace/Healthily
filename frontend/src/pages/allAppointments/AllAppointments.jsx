@@ -12,92 +12,96 @@ const AllAppointments = ({ user }) => {
     setSelectedAppointment(null);
   };
 
-  const dummyData = [
-    {
-      date: "23-04-15",
-      time: "12:00 PM",
-      title: "Annual Physical Exam",
-      status: "Scheduled",
-      doctorEmail: "doctor1@example.com",
-      patientEmail: "patient1@example.com",
-      doctorName: "Praharsh",
-      patientName: "Praharsh Patel",
-    },
-    {
-      date: "23-05-01",
-      time: "12:00 PM",
-      title: "Follow-up Appointment",
-      status: "Completed",
-      doctorEmail: "doctor2@example.com",
-      patientEmail: "patient2@example.com",
-      doctorName: "Praharsh",
-      patientName: "Praharsh Patel",
-    },
-    {
-      date: "23-06-10",
-      time: "12:00 PM",
-      title: "Consultation for Knee Pain",
-      status: "Scheduled",
-      doctorEmail: "doctor1@example.com",
-      patientEmail: "patient3@example.com",
-    },
-    {
-      date: "23-07-20",
-      time: "12:00 PM",
-      title: "Routine Checkup",
-      status: "Pending",
-      doctorEmail: "doctor3@example.com",
-      patientEmail: "patient4@example.com",
-    },
-    {
-      date: "23-08-05",
-      time: "12:00 PM",
-      title: "Flu Vaccination",
-      status: "Completed",
-      doctorEmail: "doctor2@example.com",
-      patientEmail: "patient1@example.com",
-    },
-  ];
+  // const dummyData = [
+  //   {
+  //     date: "23-04-15",
+  //     time: "12:00 PM",
+  //     title: "Annual Physical Exam",
+  //     status: "Scheduled",
+  //     doctorEmail: "doctor1@example.com",
+  //     patientEmail: "patient1@example.com",
+  //     doctorName: "Praharsh",
+  //     patientName: "Praharsh Patel",
+  //   },
+  //   {
+  //     date: "23-05-01",
+  //     time: "12:00 PM",
+  //     title: "Follow-up Appointment",
+  //     status: "Completed",
+  //     doctorEmail: "doctor2@example.com",
+  //     patientEmail: "patient2@example.com",
+  //     doctorName: "Praharsh",
+  //     patientName: "Praharsh Patel",
+  //   },
+  //   {
+  //     date: "23-06-10",
+  //     time: "12:00 PM",
+  //     title: "Consultation for Knee Pain",
+  //     status: "Scheduled",
+  //     doctorEmail: "doctor1@example.com",
+  //     patientEmail: "patient3@example.com",
+  //   },
+  //   {
+  //     date: "23-07-20",
+  //     time: "12:00 PM",
+  //     title: "Routine Checkup",
+  //     status: "Pending",
+  //     doctorEmail: "doctor3@example.com",
+  //     patientEmail: "patient4@example.com",
+  //   },
+  //   {
+  //     date: "23-08-05",
+  //     time: "12:00 PM",
+  //     title: "Flu Vaccination",
+  //     status: "Completed",
+  //     doctorEmail: "doctor2@example.com",
+  //     patientEmail: "patient1@example.com",
+  //   },
+  // ];
+  // useEffect(() => {
   //   setAppointments(dummyData);
-  //   const fetchAppointments = async () => {
-  //     let url;
-  //     let method;
+  // }, []);
 
-  //     if (user.role === "PATIENT") {
-  //       url = "http://localhost:8080/healthily/api/patient/appointments";
-  //       method = "POST";
-  //     } else if (user.role === "DOCTOR") {
-  //       url = "http://localhost:8080/healthily/api/doctor/appointments";
-  //       method = "POST";
-  //     } else if (user.role === "ADMIN") {
-  //       url = "http://localhost:8080/healthily/api/admin/appointments";
-  //       method = "GET";
-  //     }
+  
+  const fetchAppointments = async () => {
+    let url;
+    let method;
+    let body;
 
-  //     if (url) {
-  //       try {
-  //         const response = await fetch(url, {
-  //           method: method,
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({ email: user.email }),
-  //         });
-  //         const data = await response.json();
-  //         setAppointments(data);
-  //       } catch (error) {
-  //         console.error("Error fetching appointments:", error);
-  //       }
-  //     }
-  //   };
+    if (user.role === "PATIENT") {
+      url = "http://localhost:8080/healthily/api/patient/allAppointment";
+      method = "POST";
+      body = { patientEmail: user?.email };
+    } else if (user.role === "DOCTOR") {
+      url = "http://localhost:8080/healthily/api/doctor/allAppointment";
+      method = "POST";
+      body = { doctorEmail: user?.email };
+    } else if (user.role === "ADMIN") {
+      url = "http://localhost:8080/healthily/api/admin/allAppointment";
+      method = "GET";
+    }
 
-  //   useEffect(() => {
-  //     fetchAppointments();
-  //   }, [user]);
+    if (url) {
+      try {
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        setAppointments(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    }
+  };
 
   useEffect(() => {
-    setAppointments(dummyData);
-  }, []);
+    fetchAppointments();
+  }, [user]);
 
   const filteredAppointments = appointments.filter((appointment) => {
     const {

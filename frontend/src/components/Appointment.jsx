@@ -82,7 +82,7 @@ const Appointment = ({ role, appointments, onClick }) => {
               <div className="col-span-2 px-2">{appointment.patientName}</div>
             ) : null}
             <div className="col-span-2 text-center px-2">
-              {appointment.status}
+              {appointment?.status === false ? "Booked" : "Diagnosed"}
             </div>
           </div>
         ))}

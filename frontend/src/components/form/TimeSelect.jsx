@@ -34,15 +34,15 @@ const TimeSelect = ({ register, errors }) => {
   return (
     <>
       <select
-        {...register("timeSlot", { required: "Select time slot" })}
-        name="timeSlot"
+        {...register("time", { required: "Select time slot" })}
+        name="time"
         className="my-2 border-b-2 border-[#605BFF] focus:outline-none px-1"
       >
         <option value="">Select Time</option>
         {timeOptions}
       </select>
-      {errors.timeSlot && (
-        <span className="text-red-500">{errors.timeSlot.message}</span>
+      {errors.time && (
+        <span className="text-red-500">{errors.time.message}</span>
       )}
     </>
   );

@@ -69,7 +69,7 @@ function App() {
           }
         >
           <Route path="" element={<UpcomingAppointment user={user} />} />
-          <Route path="new" element={<NewAppoint />} />
+          <Route path="new" element={<NewAppoint user={user}/>} />
           <Route
             path="appointments"
             element={<AllAppointments user={user} />}

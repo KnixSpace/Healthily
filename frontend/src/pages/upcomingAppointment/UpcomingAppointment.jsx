@@ -19,16 +19,19 @@ const UpcomingAppointment = ({ user }) => {
       let apiEndpoint, method, body;
 
       if (user.role === "ADMIN") {
-        apiEndpoint = "http://localhost:8080/healthily/api/admin/upcoming";
+        apiEndpoint =
+          "http://localhost:8080/healthily/api/admin/upComingAppointment";
         method = "GET";
       } else if (user.role === "PATIENT") {
-        apiEndpoint = "http://localhost:8080/healthily/api/patient/upcoming";
+        apiEndpoint =
+          "http://localhost:8080/healthily/api/patient/upComingAppointment";
         method = "POST";
-        body = JSON.stringify({ userEmail: user.email });
+        body = JSON.stringify({ patientEmail: user.email });
       } else if (user.role === "DOCTOR") {
-        apiEndpoint = "http://localhost:8080/healthily/api/doctor/upcoming";
+        apiEndpoint =
+          "http://localhost:8080/healthily/api/doctor/upComingAppointment";
         method = "POST";
-        body = JSON.stringify({ userEmail: user.email });
+        body = JSON.stringify({ doctorEmail: user.email });
       }
 
       fetch(apiEndpoint, {
@@ -41,6 +44,7 @@ const UpcomingAppointment = ({ user }) => {
         .then((response) => response.json())
         .then((data) => {
           setUpcomingAppointments(data);
+          console.log(data);
         })
         .catch((error) => {
           console.error("Error fetching upcoming appointments:", error);
@@ -52,17 +56,26 @@ const UpcomingAppointment = ({ user }) => {
         let apiEndpoint, method, body;
 
         if (user.role === "ADMIN") {
-          apiEndpoint = "http://localhost:8080/healthily/api/admin/date";
+          apiEndpoint =
+            "http://localhost:8080/healthily/api/admin/appointmentByDate";
           method = "POST";
           body = JSON.stringify({ date: selectedDate });
         } else if (user.role === "PATIENT") {
-          apiEndpoint = "http://localhost:8080/healthily/api/patient/date";
+          apiEndpoint =
+            "http://localhost:8080/healthily/api/patient/appointmentByDate";
           method = "POST";
-          body = JSON.stringify({ userEmail: user.email, date: selectedDate });
+          body = JSON.stringify({
+            patientEmail: user.email,
+            date: selectedDate,
+          });
         } else if (user.role === "DOCTOR") {
-          apiEndpoint = "http://localhost:8080/healthily/api/doctor/date";
+          apiEndpoint =
+            "http://localhost:8080/healthily/api/doctor/appointmentByDate";
           method = "POST";
-          body = JSON.stringify({ userEmail: user.email, date: selectedDate });
+          body = JSON.stringify({
+            doctorEmail: user.email,
+            date: selectedDate,
+          });
         }
 
         fetch(apiEndpoint, {
@@ -110,6 +123,7 @@ const UpcomingAppointment = ({ user }) => {
             ) : (
               <>
                 <AppointmentDetails
+                  appointmentID={selectedAppointment?._id}
                   onBackToAppointments={handleBackToAppointments}
                 />
               </>

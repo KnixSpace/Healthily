@@ -22,11 +22,17 @@ const ProfileForm = ({ user, checkDoctor }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // const formattedTimeSlots = Object.entries(data.timeSlots).map(
+    //   ([day, slots]) => {
+    //     const obj = {};
+    //     obj[day] = slots;
+    //     return obj;
+    //   }
+    // );
+
     const formattedTimeSlots = Object.entries(data.timeSlots).map(
       ([day, slots]) => {
-        const obj = {};
-        obj[day] = slots;
-        return obj;
+        return { day, time: slots };
       }
     );
 
@@ -36,6 +42,8 @@ const ProfileForm = ({ user, checkDoctor }) => {
       ...data,
       timeSlots: formattedTimeSlots,
     };
+
+    console.log(JSON.stringify(profileData));
     setUserProfile(profileData);
 
     fetch("http://localhost:8080/healthily/api/doctor/saveDoctor", {
