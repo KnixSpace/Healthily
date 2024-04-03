@@ -13,6 +13,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -29,14 +30,6 @@ public class DoctorService {
     }
     public void saveDoc(Doctors doctors){
         doctorRepository.save(doctors);
-    }
-    public List<String> DocFromAppointment(String date, String time){
-        List<Appointment> appointments =  appointmentRepository.findByDateAndTime(date,time);
-        List<String> doctors = new ArrayList<>();
-        for(Appointment appointment : appointments){
-            doctors.add(appointment.getDoctorEmail());
-        }
-        return doctors;
     }
 
     public List<Appointment> allAppointment(String doctorEmail){
@@ -55,20 +48,30 @@ public class DoctorService {
     public List<Appointment> appointmentByDate(String date,String email){
         return appointmentRepository.findByDateAndDoctorEmail(date,email);
     }
-    public List<GetAvailableDoctorDTO> getAvailableDoctor(List<String> email, String day, String time, List<String> specializations){
-        Doctors doctors = new Doctors();
+
+    public List<String> doctorEmailFromAppointment(String date, String time){
+        List<Appointment> appointments = appointmentRepository.findByDateAndTime(date,time);
+        List<String> doctorsEmail = new ArrayList<>();
+        for (Appointment appointment : appointments){
+            doctorsEmail.add(appointment.getDoctorEmail());
+        }
+        return doctorsEmail;
+    }
+
+    public List<GetAvailableDoctorDTO> getDoctor(String day, String time, List<String> specializations, List<String> emailsToDiscard) {
         List<GetAvailableDoctorDTO> getAvailableDoctorDTOS = new ArrayList<>();
         for (String specialization : specializations){
-            doctors = doctorRepository.findByEmailNotAndTimeSlotsAndSpecialization(email,day,time,specialization);
-            if(doctors!=null){
-                GetAvailableDoctorDTO availableDoctorDTO = new GetAvailableDoctorDTO();
-                availableDoctorDTO.setEmail(doctors.getEmail());
-                availableDoctorDTO.setName(doctors.getFirstName()+" "+doctors.getLastName());
-                availableDoctorDTO.setImage(doctors.getProfileImg());
-                availableDoctorDTO.setSpecialization(doctors.getSpecialization());
-                getAvailableDoctorDTOS.add(availableDoctorDTO);
-            }
+            List<Doctors> doctors = doctorRepository.findDoctorsByTimeSlotAndSpecializationAndEmailNotIn(day,time,specialization,emailsToDiscard);
+          for (Doctors doctor : doctors){
+              GetAvailableDoctorDTO getAvailableDoctorDTO = new GetAvailableDoctorDTO();
+              getAvailableDoctorDTO.setName(doctor.getFirstName() + " " + doctor.getLastName());
+              getAvailableDoctorDTO.setEmail(doctor.getEmail());
+              getAvailableDoctorDTO.setImage(doctor.getProfileImg());
+              getAvailableDoctorDTO.setSpecialization(doctor.getSpecialization());
+              getAvailableDoctorDTOS.add(getAvailableDoctorDTO);
+          }
         }
         return getAvailableDoctorDTOS;
     }
+
 }

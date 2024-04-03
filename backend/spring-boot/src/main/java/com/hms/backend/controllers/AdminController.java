@@ -84,6 +84,7 @@ public class AdminController {
             appointment1.setDoctorEmail(appointment.getDoctorEmail());
             appointment1.setPatientEmail(appointment.getPatientEmail());
             appointment1.setStatus(appointment.getStatus());
+            appointment1.setSpecialization(appointment.getSpecialization());
 
             appointmentDTOs.add(appointment1);
         }

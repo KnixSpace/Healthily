@@ -10,9 +10,7 @@ import java.util.List;
 
 public interface DoctorRepository extends MongoRepository<Doctors, String> {
     Doctors findByEmail(String Email);
-    @Query(value = "{ 'email': { $nin: ?0}, 'timeSlots': { $elemMatch: { ?1: { $in: [?2] } } }, 'specialization': ?3}",
-            fields = "{'firstName': 1,'lastName': 1,'email': 1,'specialization': 1,'profileImg': 1}")
-    Doctors findByEmailNotAndTimeSlotsAndSpecialization(List<String> docEmail, String day, String time, String specializations);
 
-
+    @Query("{ 'timeSlots': { $elemMatch: { 'day': ?0, 'time': ?1 } }, 'specialization':  ?2 , 'email': { $nin: ?3 } }")
+    List<Doctors> findDoctorsByTimeSlotAndSpecializationAndEmailNotIn(String day, String time, String specializations, List<String> emailsToDiscard);
 }
