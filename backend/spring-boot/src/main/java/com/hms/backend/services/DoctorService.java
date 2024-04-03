@@ -39,10 +39,10 @@ public class DoctorService {
         return doctors;
     }
 
-    public List<Appointment> getAllAppointmentByDoctor(String doctorEmail){
+    public List<Appointment> allAppointment(String doctorEmail){
         return appointmentRepository.findAllByDoctorEmail(doctorEmail);
     }
-    public List<Appointment> getUpcomingAppointment(String email) {
+    public List<Appointment> upcomingAppointment(String email) {
 
         LocalDate currentDate = LocalDate.now();
         YearMonth yearMonth = YearMonth.from(currentDate);
@@ -52,7 +52,7 @@ public class DoctorService {
         String endDate = lastDayOfMonth.format(formatter);
         return appointmentRepository.findByDateBetweenAndDoctorEmail(startDate, endDate,email);
     }
-    public List<Appointment> getAppointmentByDate(String date,String email){
+    public List<Appointment> appointmentByDate(String date,String email){
         return appointmentRepository.findByDateAndDoctorEmail(date,email);
     }
     public List<GetAvailableDoctorDTO> getAvailableDoctor(List<String> email, String day, String time, List<String> specializations){

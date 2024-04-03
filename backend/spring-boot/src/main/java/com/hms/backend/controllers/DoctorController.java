@@ -56,12 +56,12 @@ public class DoctorController {
     @PostMapping("/allAppointment")
     public List<Appointment> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
         String doctorEmail = appointmentDTO.getDoctorEmail();
-        return doctorService.getAllAppointmentByDoctor(doctorEmail);
+        return doctorService.allAppointment(doctorEmail);
     }
     @PostMapping("/upComingAppointment")
     public List<AppointmentDTO> upComingAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         String doctorEmail = appointmentDTO.getDoctorEmail();
-        List<Appointment> appointments = doctorService.getUpcomingAppointment(doctorEmail);
+        List<Appointment> appointments = doctorService.upcomingAppointment(doctorEmail);
         List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
         return appointmentDTOs;
     }
@@ -69,7 +69,7 @@ public class DoctorController {
     public List<AppointmentDTO> appointmentByDate(@RequestBody AppointmentDTO appointmentDTO) {
         String date = appointmentDTO.getDate();
         String doctorEmail = appointmentDTO.getDoctorEmail();
-        List<Appointment> appointments = doctorService.getAppointmentByDate(date,doctorEmail);
+        List<Appointment> appointments = doctorService.appointmentByDate(date,doctorEmail);
         List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
         return appointmentDTOs;
     }
