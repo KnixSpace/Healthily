@@ -8,6 +8,9 @@ import com.hms.backend.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +38,26 @@ public class DoctorService {
         }
         return doctors;
     }
+
+    public List<Appointment> getAllAppointmentByDoctor(String doctorEmail){
+        return appointmentRepository.findAllByDoctorEmail(doctorEmail);
+    }
+    public List<Appointment> getUpcomingAppointment(String email) {
+
+        LocalDate currentDate = LocalDate.now();
+        YearMonth yearMonth = YearMonth.from(currentDate);
+        LocalDate lastDayOfMonth = yearMonth.atEndOfMonth();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String startDate = currentDate.format(formatter);
+        String endDate = lastDayOfMonth.format(formatter);
+        return appointmentRepository.findByDateBetweenAndDoctorEmail(startDate, endDate,email);
+    }
+    public List<Appointment> getAppointmentByDate(String date,String email){
+        return appointmentRepository.findByDateAndDoctorEmail(date,email);
+    }
     public List<GetAvailableDoctorDTO> getAvailableDoctor(List<String> email, String day, String time, List<String> specializations){
         Doctors doctors = new Doctors();
         List<GetAvailableDoctorDTO> getAvailableDoctorDTOS = new ArrayList<>();
-
         for (String specialization : specializations){
             doctors = doctorRepository.findByEmailNotAndTimeSlotsAndSpecialization(email,day,time,specialization);
             if(doctors!=null){

@@ -57,7 +57,7 @@ public class AdminController {
         return appointmentDTOs;
     }
     @GetMapping("/upComingAppointment")
-    public List<AppointmentDTO> getUpComingAppointment(){
+    public List<AppointmentDTO> upComingAppointment(){
         List<Appointment> appointments = adminService.upComingAppointment();
         List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
         return appointmentDTOs;

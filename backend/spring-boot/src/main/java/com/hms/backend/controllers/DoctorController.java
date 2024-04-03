@@ -1,8 +1,10 @@
 package com.hms.backend.controllers;
 
+import com.hms.backend.dto.appointmentDTO.AppointmentDTO;
 import com.hms.backend.dto.doctorDTO.CheckAvailabilityDTO;
 import com.hms.backend.dto.doctorDTO.CheckDoctorDTO;
 import com.hms.backend.dto.doctorDTO.GetAvailableDoctorDTO;
+import com.hms.backend.entities.Appointment;
 import com.hms.backend.entities.Doctors;
 import com.hms.backend.services.DoctorService;
 import com.hms.backend.services.UserService;
@@ -13,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/healthily/api/doctor")
@@ -43,10 +47,48 @@ public class DoctorController {
         String time = checkAvailabilityDTO.getTime();
         String day = checkAvailabilityDTO.getDay();
         String description = checkAvailabilityDTO.getDescription();
-
         List<String> doctorEmails = doctorService.DocFromAppointment(date,time);
         FindDoctor findDoctor = new FindDoctor();
         List<String> specializations = findDoctor.getDoctorBySpecialiazation(description.toLowerCase());
         return doctorService.getAvailableDoctor(doctorEmails,day,time,specializations);
     }
+
+    @PostMapping("/allAppointment")
+    public List<Appointment> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        String doctorEmail = appointmentDTO.getDoctorEmail();
+        return doctorService.getAllAppointmentByDoctor(doctorEmail);
+    }
+    @PostMapping("/upComingAppointment")
+    public List<AppointmentDTO> upComingAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        String doctorEmail = appointmentDTO.getDoctorEmail();
+        List<Appointment> appointments = doctorService.getUpcomingAppointment(doctorEmail);
+        List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
+        return appointmentDTOs;
+    }
+    @PostMapping("/appointmentByDate")
+    public List<AppointmentDTO> appointmentByDate(@RequestBody AppointmentDTO appointmentDTO) {
+        String date = appointmentDTO.getDate();
+        String doctorEmail = appointmentDTO.getDoctorEmail();
+        List<Appointment> appointments = doctorService.getAppointmentByDate(date,doctorEmail);
+        List<AppointmentDTO> appointmentDTOs = getAppointmentDTOS(appointments);
+        return appointmentDTOs;
+    }
+    private static List<AppointmentDTO> getAppointmentDTOS(List<Appointment> appointments) {
+        List<AppointmentDTO> appointmentDTOs = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            AppointmentDTO appointment1 = new AppointmentDTO();
+            appointment1.set_id(appointment.getId().toString());
+            appointment1.setDate(appointment.getDate());
+            appointment1.setTime(appointment.getTime());
+            appointment1.setTitle(appointment.getTitle());
+            appointment1.setDoctorName(appointment.getDoctorName());
+            appointment1.setPatientName(appointment.getPatientName());
+            appointment1.setDoctorEmail(appointment.getDoctorEmail());
+            appointment1.setPatientEmail(appointment.getPatientEmail());
+            appointment1.setStatus(appointment.getStatus());
+            appointmentDTOs.add(appointment1);
+        }
+        return appointmentDTOs;
+    }
+
 }

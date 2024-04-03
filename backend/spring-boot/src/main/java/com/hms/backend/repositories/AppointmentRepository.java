@@ -3,6 +3,7 @@ package com.hms.backend.repositories;
 import com.hms.backend.entities.Appointment;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
@@ -12,4 +13,13 @@ public interface AppointmentRepository extends MongoRepository<Appointment, Obje
     List<Appointment> findByDateBetween(String currentDate,String endDate);
 
     List<Appointment> findByDate(String date);
+
+    List<Appointment> findAllByDoctorEmail(String doctorEmail);
+    
+    @Query("{'date': {'$gte': ?0,'$lte': ?1},'doctorEmail': ?2}")
+    List<Appointment> findByDateBetweenAndDoctorEmail(String startDate, String endDate, String email);
+
+    @Query("{'date': ?0,'doctorEmail': ?1}")
+    List<Appointment> findByDateAndDoctorEmail(String date,String email);
+
 }
