@@ -24,6 +24,7 @@ public class Appointment {
     private String patientEmail;
     private String doctorEmail;
     private String title;
+    private String specialization;
     private String description;
     private Boolean status=false;
 

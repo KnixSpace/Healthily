@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface AppointmentRepository extends MongoRepository<Appointment, ObjectId> {
     List<Appointment> findByDateAndTime(String date, String time);
+
+    List<Appointment> findByDateBetween(String currentDate,String endDate);
+
+    List<Appointment> findByDate(String date);
 }
