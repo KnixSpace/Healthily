@@ -17,11 +17,14 @@ public class Appointment {
 
     @Id
     private ObjectId id;
-    private Date date;
+    private String date;
     private String time;
+    private String doctorName;
+    private String patientName;
     private String patientEmail;
     private String doctorEmail;
     private String title;
-    private String discription;
-    private Boolean status;
+    private String description;
+    private Boolean status=false;
+
 }
