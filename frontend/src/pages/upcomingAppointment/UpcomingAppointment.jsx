@@ -44,7 +44,6 @@ const UpcomingAppointment = ({ user }) => {
         .then((response) => response.json())
         .then((data) => {
           setUpcomingAppointments(data);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error fetching upcoming appointments:", error);

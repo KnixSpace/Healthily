@@ -62,7 +62,6 @@ const AllAppointments = ({ user }) => {
   //   setAppointments(dummyData);
   // }, []);
 
-  
   const fetchAppointments = async () => {
     let url;
     let method;
@@ -153,6 +152,7 @@ const AllAppointments = ({ user }) => {
         ) : (
           <>
             <AppointmentDetails
+              appointmentID={selectedAppointment?._id}
               onBackToAppointments={handleBackToAppointments}
             />
           </>

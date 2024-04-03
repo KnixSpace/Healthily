@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const NewAppoint = ({ user }) => {
+  const [appointment, setAppointment] = useState(false);
   const [open, setOpen] = useState(false);
   const [availableDoctor, setAvailableDoctor] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -25,6 +26,7 @@ const NewAppoint = ({ user }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -48,6 +50,7 @@ const NewAppoint = ({ user }) => {
       })
         .then((response) => {
           if (response.ok) {
+            setAppointment(true);
             handleSnackbar();
             console.log("Appointment booked successfully!");
           } else {
@@ -57,6 +60,9 @@ const NewAppoint = ({ user }) => {
         .catch((error) => {
           console.error("Error", error);
         });
+      reset();
+      setSelectedDoctor(null);
+      setAvailableDoctor([]);
     } else {
       const date = new Date(data.date);
       const days = [
@@ -72,7 +78,6 @@ const NewAppoint = ({ user }) => {
         day: days[date.getDay()],
         ...data,
       };
-      console.log(body);
 
       fetch("http://localhost:8080/healthily/api/doctor/availability", {
         method: "POST",
@@ -89,8 +94,13 @@ const NewAppoint = ({ user }) => {
           }
         })
         .then((data) => {
-          console.log(data);
           setAvailableDoctor(data);
+          if (data.length === 0) {
+            console.log(availableDoctor);
+            console.log("too foo");
+            handleSnackbar();
+            return;
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -196,9 +206,10 @@ const NewAppoint = ({ user }) => {
         autoHideDuration={1500}
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        message="Success"
       >
-        <Alert severity="success">Appointment Booked</Alert>
+        <Alert severity={!appointment ? "error" : "success"}>
+          {!appointment ? "No Slot" : "Appoint booked"}
+        </Alert>
       </Snackbar>
     </div>
   );
