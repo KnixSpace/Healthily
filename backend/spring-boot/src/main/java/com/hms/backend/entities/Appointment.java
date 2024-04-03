@@ -19,11 +19,9 @@ public class Appointment {
     private ObjectId id;
     private Date date;
     private String time;
-    private ObjectId patientId;
-    private ObjectId doctorID;
+    private String patientEmail;
+    private String doctorEmail;
     private String title;
     private String discription;
     private Boolean status;
-    private ObjectId reportId;
-
 }
