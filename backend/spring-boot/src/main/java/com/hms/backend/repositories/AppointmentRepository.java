@@ -29,6 +29,5 @@ public interface AppointmentRepository extends MongoRepository<Appointment, Obje
 
     @Query("{'date': ?0,'patientEmail': ?1}")
     List<Appointment> findByDateAndPatientEmail(String date,String email);
-
-
+    Appointment findById(String id);
 }

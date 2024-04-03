@@ -1,5 +1,6 @@
 package com.hms.backend.controllers;
 
+import com.hms.backend.dto.appointmentDTO.AppointmentDTO;
 import com.hms.backend.entities.Appointment;
 import com.hms.backend.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class AppointmentController {
         appointmentService.saveAppointment(appointment);
     }
 
+    @PostMapping("/id")
+    public Appointment getAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        return appointmentService.getAppointment(appointmentDTO.get_id());
+    }
 
 }

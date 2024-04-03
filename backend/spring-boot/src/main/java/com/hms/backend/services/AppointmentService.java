@@ -18,4 +18,7 @@ public class AppointmentService {
         appointmentRepository.save(appointment);
     }
 
+    public Appointment getAppointment(String id){
+        return appointmentRepository.findById(id);
+    }
 }
