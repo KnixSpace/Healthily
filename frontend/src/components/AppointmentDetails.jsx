@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Text from "./Text";
+import Report from "./Report";
 
-const AppointmentDetails = ({ appointmentID, onBackToAppointments }) => {
+const AppointmentDetails = ({ role, appointmentID, onBackToAppointments }) => {
   const [appointmentData, setAppointmentData] = useState(null);
 
   useEffect(() => {
@@ -53,6 +54,28 @@ const AppointmentDetails = ({ appointmentID, onBackToAppointments }) => {
         />
         <Text label={"Patient Name"} value={appointmentData?.patientName} />
         <Text label={"Description"} value={appointmentData?.description} />
+        {!appointmentData?.status ? (
+          <>
+            {role === "PATIENT" || role === "ADMIN" ? (
+              "Admin Patient Nothing"
+            ) : (
+              <Report />
+            )}
+          </>
+        ) : (
+          <>
+            <div className="flex items-start gap-3">
+              <div className="text-lg font-medium text-[#605BFF] w-[150px] shrink-0">
+                Report
+              </div>
+              <div className="w-full h-[200px] overflow-y-auto">
+                <div className="text-lg font-medium text-slate-500">
+                  Report Description
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

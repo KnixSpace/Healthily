@@ -9,3 +9,4 @@ const Text = ({ label, value }) => {
   );
 };
 export default Text;
+

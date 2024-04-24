@@ -122,6 +122,7 @@ const UpcomingAppointment = ({ user }) => {
             ) : (
               <>
                 <AppointmentDetails
+                  role={user.role}
                   appointmentID={selectedAppointment?._id}
                   onBackToAppointments={handleBackToAppointments}
                 />
