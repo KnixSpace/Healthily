@@ -7,15 +7,15 @@ public class FindDoctor {
         List<String> doctorSpecializations = new ArrayList<>();
         Map<String, List<String>> doctorSpecializationMap = new HashMap<>();
         doctorSpecializationMap.put("General", (Arrays.asList(
-                "general", "check-up", "cold", "flu", "fever", "cough", "sore", "throat", "headache", "body", "ache", "fatigue", " influenza", "influenza-like illness", "common cold", "respiratory infection", "viral infection", "respiratory symptoms."
+                "general", "check-up", "cold", "flu", "fever", "cough", "sore", "throat", "headache", "body", "ache", "fatigue", " influenza", "influenza-like", "illness", "common cold", "respiratory", "infection", "viral", "respiratory"
         )));
 
         doctorSpecializationMap.put("Pediatrician", (Arrays.asList(
-                "child", "children", "pediatric", "paediatric", "fever", "cough", "vaccination", "growth", "development", "childhood", "diseases", "infant", "toddler", "newborn", "baby", "colic", "teething", "immunization", "child health", "pediatric care."
+                "child", "children", "pediatric", "paediatric", "fever", "cough", "vaccination", "growth", "development", "childhood", "diseases", "infant", "toddler", "newborn", "baby", "colic", "teething", "immunization", "child health", "pediatric"
         )));
 
         doctorSpecializationMap.put("Cardiologist", (Arrays.asList(
-                "heart", "chest", "pain", "high", "blood", "pressure", "hypertension", "arrhythmia", "palpitations", "shortness", "breath", "cardiovascular", "cardiac", "heart disease", "heart attack", "angina", "heart failure", "coronary artery disease", "cardiac arrest", "heart rhythm disorder", "heart ."
+                "heart", "chest", "pain", "high", "blood", "pressure", "hypertension", "arrhythmia", "palpitations", "shortness", "breath", "cardiovascular", "cardiac", "heart disease", "heart attack", "angina", "heart failure", "coronary", "artery", "disease", "cardiac", "arrest", "heart rhythm disorder", "heart"
         )));
 
         doctorSpecializationMap.put("Dermatologist", (Arrays.asList(
@@ -34,22 +34,18 @@ public class FindDoctor {
         )));
 
         doctorSpecializationMap.put("Gynecologist", (Arrays.asList(
-                "women's health", "pregnancy", "childbirth", "pap smear",
-                "contraception", "menopause", "menstrual", "menopause", "pelvic", "infertility", "ovarian", "cyst", "cervical", "cancer", "gynecological", "obstetrics", "obstetrician", "gynecology", "reproductive", "health", "reproductive system."
+                "women's health", "pregnancy", "childbirth", "pap smear", "contraception", "menopause", "menstrual", "menopause", "pelvic", "infertility", "ovarian", "cyst", "cervical", "cancer", "gynecological", "obstetrics", "obstetrician", "gynecology", "reproductive", "health", "reproductive system."
 
         )));
 
         doctorSpecializationMap.put("Endocrinologist", (Arrays.asList(
-                "hormonal disorders", "diabetes", "thyroid disorders",
-                "adrenal disorders", "hormone therapy"
+                "hormonal disorders", "diabetes", "thyroid disorders", "adrenal disorders", "hormone therapy"
         )));
 
         doctorSpecializationMap.put("Gastroenterologist", (Arrays.asList(
-                "digestive health", "gastrointestinal disorders", "crohn's disease",
-                "ulcerative colitis", "endoscopy", "colonoscopy"
+                "digestive health", "gastrointestinal disorders", "crohn's disease","ulcerative colitis", "endoscopy", "colonoscopy"
         )));
-
-
+        
         doctorSpecializationMap.put("Otolaryngologies", (Arrays.asList(
                 "ear", "sore", "throat", "sinusitis", "tonsillitis", "hearing", "loss", "nasal", "congestion", "vertigo", "tinnitus", "ENT", "otolaryngology", "otolaryngologist", "ear nose throat", "laryngitis", "nasal polyps", "hearing impairment."
         )));

@@ -88,7 +88,7 @@ public class DoctorController {
         List<String> discardedDoctorEmail = doctorService.doctorEmailFromAppointment(date,time);
         FindDoctor findDoctor = new FindDoctor();
         List<String> specializations = findDoctor.getDoctorBySpecialiazation(description.toLowerCase());
-        System.out.println(specializations);
+//        System.out.println(specializations);
         return doctorService.getDoctor(day,time,specializations,discardedDoctorEmail);
     }
 
