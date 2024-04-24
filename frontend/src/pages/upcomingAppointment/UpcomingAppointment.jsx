@@ -99,7 +99,7 @@ const UpcomingAppointment = ({ user }) => {
     } else {
       fetchUpcomingAppointments();
     }
-  }, [user, selectedDate]);
+  }, [user, selectedDate, selectedAppointment]);
 
   return (
     <>
@@ -114,7 +114,7 @@ const UpcomingAppointment = ({ user }) => {
             {!selectedAppointment ? (
               <>
                 <Appointment
-                  role={user.role}
+                  role={user?.role}
                   appointments={upcomingAppointments}
                   onClick={setSelectedAppointment}
                 />
@@ -122,7 +122,7 @@ const UpcomingAppointment = ({ user }) => {
             ) : (
               <>
                 <AppointmentDetails
-                  role={user.role}
+                  role={user?.role}
                   appointmentID={selectedAppointment?._id}
                   onBackToAppointments={handleBackToAppointments}
                 />

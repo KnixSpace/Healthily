@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppointmentDTO {
-
+public class AppointmentDetailsDTO {
     String _id;
     String date;
     String time;
@@ -18,5 +17,7 @@ public class AppointmentDTO {
     String specialization;
     String doctorEmail;
     String patientEmail;
+    String description;
     Boolean status;
+    String report;
 }

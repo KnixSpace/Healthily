@@ -1,6 +1,8 @@
 package com.hms.backend.controllers;
 
 import com.hms.backend.dto.appointmentDTO.AppointmentDTO;
+import com.hms.backend.dto.appointmentDTO.AppointmentDetailsDTO;
+import com.hms.backend.dto.appointmentDTO.ReportDTO;
 import com.hms.backend.entities.Appointment;
 import com.hms.backend.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,12 @@ public class AppointmentController {
     }
 
     @PostMapping("/id")
-    public Appointment getAppointment(@RequestBody AppointmentDTO appointmentDTO){
+    public AppointmentDetailsDTO getAppointment(@RequestBody AppointmentDTO appointmentDTO){
         return appointmentService.getAppointment(appointmentDTO.get_id());
     }
 
+    @PostMapping("/generateReport")
+    public void saveReport(@RequestBody ReportDTO reportDTO){
+        appointmentService.generateReport(reportDTO);
+    }
 }

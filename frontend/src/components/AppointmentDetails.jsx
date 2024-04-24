@@ -39,7 +39,7 @@ const AppointmentDetails = ({ role, appointmentID, onBackToAppointments }) => {
         >
           keyboard_backspace
         </span>
-        <Text label={"ID"} value={appointmentID} />
+        {/* <Text label={"ID"} value={appointmentID} /> */}
         <Text label={"Date"} value={appointmentData?.date} />
         <Text label={"Time"} value={appointmentData?.time} />
         <Text
@@ -57,9 +57,9 @@ const AppointmentDetails = ({ role, appointmentID, onBackToAppointments }) => {
         {!appointmentData?.status ? (
           <>
             {role === "PATIENT" || role === "ADMIN" ? (
-              "Admin Patient Nothing"
+              ""
             ) : (
-              <Report />
+              <Report appointmentId={appointmentID} />
             )}
           </>
         ) : (
@@ -70,7 +70,7 @@ const AppointmentDetails = ({ role, appointmentID, onBackToAppointments }) => {
               </div>
               <div className="w-full h-[200px] overflow-y-auto">
                 <div className="text-lg font-medium text-slate-500">
-                  Report Description
+                  {appointmentData?.report}
                 </div>
               </div>
             </div>

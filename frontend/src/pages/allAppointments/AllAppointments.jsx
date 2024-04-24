@@ -100,7 +100,7 @@ const AllAppointments = ({ user }) => {
 
   useEffect(() => {
     fetchAppointments();
-  }, [user]);
+  }, [user, selectedAppointment]);
 
   const filteredAppointments = appointments.filter((appointment) => {
     const {
@@ -144,7 +144,7 @@ const AllAppointments = ({ user }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <Appointment
-              role={user.role}
+              role={user?.role}
               appointments={filteredAppointments}
               onClick={setSelectedAppointment}
             />
@@ -152,6 +152,7 @@ const AllAppointments = ({ user }) => {
         ) : (
           <>
             <AppointmentDetails
+              role={user?.role}
               appointmentID={selectedAppointment?._id}
               onBackToAppointments={handleBackToAppointments}
             />
