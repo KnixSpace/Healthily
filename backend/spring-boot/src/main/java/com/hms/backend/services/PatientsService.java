@@ -7,9 +7,12 @@ import com.hms.backend.entities.Patients;
 import com.hms.backend.repositories.AppointmentRepository;
 import com.hms.backend.repositories.PatientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -22,17 +25,23 @@ public class PatientsService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
-    public long getCount(){
+
+    public long getCount() {
         return patientsRepository.count();
     }
 
-    public Patients checkPatient(String email){
+    public Patients checkPatient(String email) {
         return patientsRepository.findByEmail(email);
     }
 
-    public List<Appointment> allAppointment(String patientEmail){
+    public Patients viewProfile(String email) {
+        return patientsRepository.findByEmail(email);
+    }
+
+    public List<Appointment> allAppointment(String patientEmail) {
         return appointmentRepository.findAllByPatientEmail(patientEmail);
     }
+
     public List<Appointment> upComingAppointment(String email) {
         LocalDate currentDate = LocalDate.now();
         YearMonth yearMonth = YearMonth.from(currentDate);
@@ -40,13 +49,14 @@ public class PatientsService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = currentDate.format(formatter);
         String endDate = lastDayOfMonth.format(formatter);
-      return appointmentRepository.findByDateBetweenAndPatientEmail(startDate, endDate,email);
-    }
-    public List<Appointment> appointmentByDate(String date,String email){
-        return appointmentRepository.findByDateAndPatientEmail(date,email);
+        return appointmentRepository.findByDateBetweenAndPatientEmail(startDate, endDate, email);
     }
 
-    public void SavePatientData(@RequestBody SavePatientDataDTO savePatientDataDTO){
+    public List<Appointment> appointmentByDate(String date, String email) {
+        return appointmentRepository.findByDateAndPatientEmail(date, email);
+    }
+
+    public void SavePatientData(@RequestBody SavePatientDataDTO savePatientDataDTO) {
         Patients patients = new Patients();
         patients.setEmail(savePatientDataDTO.getEmail());
         patients.setFirstName(savePatientDataDTO.getFirstName());
@@ -55,7 +65,7 @@ public class PatientsService {
         patients.setGender(savePatientDataDTO.getGender());
         patients.setPhoneNumber(savePatientDataDTO.getPhoneNumber());
         patients.setBirthDate(savePatientDataDTO.getBirthDate());
-        patients.setBloodGroup(savePatientDataDTO.getBlood()+savePatientDataDTO.getBloodGroup());
+        patients.setBloodGroup(savePatientDataDTO.getBlood() + savePatientDataDTO.getBloodGroup());
         patients.setAadhar(savePatientDataDTO.getAadhar());
 
         Address address = new Address();
@@ -70,5 +80,21 @@ public class PatientsService {
         Patients savePatient = patientsRepository.save(patients);
     }
 
-
+    @Autowired
+    private MongoOperations mongoOperations;
+    public Patients updatePatient(Patients updatedPatient){
+        Patients existingPatient = patientsRepository.findByEmail(updatedPatient.getEmail());
+        Query query = new Query(Criteria.where("email").is(updatedPatient.getEmail()));
+        Update update = new Update();
+        if(existingPatient !=null){
+            if(updatedPatient.getFirstName() !=null){
+                update.set("firstName",updatedPatient.getFirstName());
+                System.out.println(existingPatient.getFirstName());
+            }
+            Patients updatedPatientEntity = mongoOperations.findAndModify(query,update,Patients.class);
+            System.out.println(updatedPatientEntity);
+            return updatedPatientEntity;
+        }
+        return null;
+    }
 }

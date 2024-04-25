@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/healthily/api/patient")
@@ -31,6 +29,20 @@ public class PatientController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Patient with email " + email + " is not found in the database");
+        }
+    }
+    @PostMapping("/viewPatient")
+    Patients  viewPatient(@RequestBody Patients patients){
+        String email = patients.getEmail();
+        return patientsService.viewProfile(email);
+    }
+    @PutMapping("/update")
+    public ResponseEntity<Patients> updatePatient(@RequestBody Patients updatedPatient){
+        Patients patients = patientsService.updatePatient(updatedPatient);
+        if(patients != null){
+            return ResponseEntity.ok(patients);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
     @PostMapping("/savePatient")
