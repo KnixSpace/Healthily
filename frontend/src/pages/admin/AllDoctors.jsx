@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import userImg from "/user.png";
 import backDrop from "/doctorBack.jpg";
+import Text from "../../components/Text";
 const AllDoctors = () => {
-  const [doctors, setDoctors] = useState(["aa", "asd", "sd"]);
+  const [doctors, setDoctors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [doctorDetails, setDoctorDetails] = useState();
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
   const handelBackToDoctors = () => {
@@ -12,7 +14,7 @@ const AllDoctors = () => {
   };
 
   const fetchDoctors = () => {
-    fetch("", {
+    fetch("http://localhost:8080/healthily/api/admin/allDoctor", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +38,7 @@ const AllDoctors = () => {
     const body = {
       email: selectedDoctor?.email,
     };
-
-    fetch("", {
+    fetch("http://localhost:8080/healthily/api/doctor/viewDoctor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const AllDoctors = () => {
         return response.json();
       })
       .then((data) => {
-        setDoctors(data);
+        setDoctorDetails(data);
       })
       .catch((error) => {
         console.error(error);
@@ -60,6 +61,7 @@ const AllDoctors = () => {
 
   useEffect(() => {
     if (selectedDoctor) {
+      console.log(selectedDoctor);
       fetchDoctorDetails();
     } else {
       fetchDoctors();
@@ -84,6 +86,27 @@ const AllDoctors = () => {
 
   const handleConfirmationYes = () => {
     setIsConfirmationVisible(false);
+    setSelectedDoctor(null);
+    const body = {
+      email: doctorDetails?.email,
+    };
+
+    fetch("http://localhost:8080/healthily/api/doctor/deleteDoctor", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -107,19 +130,20 @@ const AllDoctors = () => {
                   <div
                     className="flex gap-4 items-center bg-[#efeeff] p-4 rounded-lg"
                     key={index}
-                    onClick={() => {
-                      setSelectedDoctor(doctor);
-                      console.log(selectedDoctor);
-                    }}
+                    onClick={() => setSelectedDoctor(doctor)}
                   >
                     <img
                       className="size-14 rounded-full"
-                      src={userImg}
+                      src={doctor?.profileImg}
                       alt="User"
                     />
                     <div>
-                      <div className="font-medium">Krupal</div>
-                      <div className="text-slate-400">Orthologist</div>
+                      <div className="font-medium">
+                        {doctor?.firstName + " " + doctor?.lastName}
+                      </div>
+                      <div className="text-slate-400">
+                        {doctor?.specialization}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -141,22 +165,25 @@ const AllDoctors = () => {
                 </div>
                 <div className="px-8">
                   <img
-                    src={userImg}
+                    src={doctorDetails?.profileImg}
                     alt=""
-                    className="size-24 mt-[-5%] border-4 border-white rounded-full"
+                    className="size-24 mt-[-5%] border-4 border-white bg-white rounded-full"
                   />
                 </div>
                 <div className="px-8 pt-2 text-3xl font-semibold text-[#605bff]">
-                  Krupal Patel
+                  {doctorDetails?.name}
                 </div>
                 <div className="px-8 text-2xl font-medium text-slate-500">
-                  Orthologist
+                  {doctorDetails?.specialization}
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  krupalgp2003@gmail.com
+                  <Text label={"Email Id"} value={doctorDetails?.email} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  9662517364
+                  <Text
+                    label={"Contact"}
+                    value={doctorDetails?.contactNumber}
+                  />
                 </div>
               </div>
               <div className="px-8">

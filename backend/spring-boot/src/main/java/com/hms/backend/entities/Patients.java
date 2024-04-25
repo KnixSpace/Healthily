@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patients {
+    private String profileImg;
     private String firstName;
     private String middleName;
     private String lastName;

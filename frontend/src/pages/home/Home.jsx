@@ -11,8 +11,8 @@ const Home = () => {
     const getCount = async () => {
       const data = await fetch("http://localhost:8080/healthily/api/home/count");
       const res = await data.json();
-      console.log(res);
-      setCounts([res, res, res]);
+      // console.log(res);
+      setCounts(res);
     };
     getCount();
   }, []);
@@ -43,19 +43,19 @@ const Home = () => {
       <div className="flex justify-center py-6 my-8 divide-x divide-[#ababab] text-center bg-gradient-to-r from-white via-[#DFDEFF] to-white rounded-xl">
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
           <div className="text-[#605BFF] md:text-4xl font-medium">
-            <CountUp end={1000} duration={1} />+
+            <CountUp end={counts?.patientCount} duration={1} />+
           </div>
           <div className="md:text-2xl">Patient</div>
         </div>
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
           <div className="text-[#605BFF] md:text-4xl font-medium">
-            <CountUp end={1000} duration={1} />+
+            <CountUp end={counts?.doctorCount} duration={1} />+
           </div>
           <div className="md:text-2xl">Doctor</div>
         </div>
         <div className="md:py-6 py-2 md:px-[60px] lg:px-[120px] px-4">
           <div className="text-[#605BFF] md:text-4xl font-medium">
-            <CountUp end={1000} duration={1} />+
+            <CountUp end={counts?.appointmentCount} duration={1} />+
           </div>
           <div className="md:text-2xl">Appointments</div>
         </div>

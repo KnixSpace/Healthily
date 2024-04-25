@@ -22,13 +22,6 @@ const ProfileForm = ({ user, checkDoctor }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // const formattedTimeSlots = Object.entries(data.timeSlots).map(
-    //   ([day, slots]) => {
-    //     const obj = {};
-    //     obj[day] = slots;
-    //     return obj;
-    //   }
-    // );
 
     const formattedTimeSlots = Object.entries(data.timeSlots).map(
       ([day, slots]) => {

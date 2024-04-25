@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SavePatientDataDTO {
+    String profileImg;
     String email;
     String aadhar;
     String birthDate;

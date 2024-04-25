@@ -41,7 +41,7 @@ const AllAppointments = ({ user }) => {
         });
         const data = await response.json();
         setAppointments(data);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.error("Error fetching appointments:", error);
       }

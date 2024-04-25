@@ -1,11 +1,36 @@
 import userImg from "/user.png";
 import backDrop from "/doctorBack.jpg";
 import Text from "../../components/Text";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UpdatePatientForm from "./UpdatePatientForm";
 
 const PatientProfile = ({ user }) => {
+  const [patient, setPatient] = useState();
   const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/healthily/api/patient/viewPatient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user?.email }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setPatient(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <>
       <div className="h-full overflow-auto">
@@ -51,24 +76,30 @@ const PatientProfile = ({ user }) => {
                   Patient
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  <Text label={"Email Id"} value={"kruplgp2003@gmail.com"} />
+                  <Text label={"Email Id"} value={patient?.email} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  <Text label={"Contact"} value={"9662517364"} />
+                  <Text label={"Contact"} value={patient?.phoneNumber} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  <Text label={"Aadhar-card"} value={"1111-258-1421-9521"} />
+                  <Text label={"Aadhar-card"} value={patient?.aadhar} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  <Text label={"Birth Date"} value={"12 March 2003"} />
+                  <Text label={"Birth Date"} value={patient?.birthDate} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
-                  <Text label={"Blood Group"} value={"O+ Ve"} />
+                  <Text label={"Blood Group"} value={patient?.bloodGroup} />
                 </div>
                 <div className="px-8 text-lg font-medium text-slate-500">
                   <Text
                     label={"Address"}
-                    value={"H-404, Balaji Park, Navsari"}
+                    value={
+                      patient?.address?.building +
+                      ", " +
+                      patient?.address?.city +
+                      ", " +
+                      patient?.address?.houseNo
+                    }
                   />
                 </div>
               </div>

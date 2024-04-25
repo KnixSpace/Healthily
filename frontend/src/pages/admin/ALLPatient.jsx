@@ -6,13 +6,14 @@ const ALLPatient = () => {
   const [patients, setPatients] = useState(["kjkjk"]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [patientDetails, setPatientDetails] = useState();
 
   const handelBackToPatients = () => {
     setSelectedPatient(null);
   };
 
   const fetchPatients = () => {
-    fetch("", {
+    fetch("http://localhost:8080/healthily/api/admin/allPatient", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -33,11 +34,12 @@ const ALLPatient = () => {
   };
 
   const fetchPatientDetails = () => {
+    console.log(selectedPatient);
     const body = {
       email: selectedPatient?.email,
     };
 
-    fetch("", {
+    fetch("http://localhost:8080/healthily/api/patient/viewPatient", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +53,7 @@ const ALLPatient = () => {
         return response.json();
       })
       .then((data) => {
-        setPatients(data);
+        setPatientDetails(data);
       })
       .catch((error) => {
         console.error(error);
@@ -65,6 +67,7 @@ const ALLPatient = () => {
       fetchPatients();
     }
   }, [selectedPatient]);
+
   const filteredPatients = patients.filter((patient) => {
     const { name, email, phoneNumber } = patient;
     const searchKeys = [name, email, phoneNumber].join(" ").toLowerCase();
@@ -92,18 +95,17 @@ const ALLPatient = () => {
                   <div
                     className="flex gap-4 items-center bg-[#efeeff] p-4 rounded-lg"
                     key={index}
-                    onClick={() => {
-                      setSelectedPatient(patient);
-                      console.log(selectedPatient);
-                    }}
+                    onClick={() => setSelectedPatient(patient)}
                   >
                     <img
                       className="size-14 rounded-full"
-                      src={userImg}
+                      src={patient?.profileImg}
                       alt="User"
                     />
                     <div>
-                      <div className="font-medium">Krupal Patel</div>
+                      <div className="font-medium">
+                        {patient?.firstName + " " + patient?.lastName}
+                      </div>
                       <div className="text-slate-400">Patient</div>
                     </div>
                   </div>
@@ -125,28 +127,28 @@ const ALLPatient = () => {
               </div>
               <div className="px-8">
                 <img
-                  src={userImg}
+                  src={selectedPatient?.profileImg}
                   alt=""
                   className="size-24 mt-[-5%] border-4 border-white rounded-full"
                 />
               </div>
               <div className="px-8 pt-2 text-3xl font-semibold text-[#605bff]">
-                Krupal Patel
+                {selectedPatient?.firstName+" "+selectedPatient?.lastName}
               </div>
               <div className="px-8 text-2xl font-medium text-slate-500">
                 Patient
               </div>
               <div className="px-8 text-lg font-medium text-slate-500">
-                <Text label={"Email Id"} value={"kruplgp2003@gmail.com"} />
+                <Text label={"Email Id"} value={patientDetails?.email} />
               </div>
               <div className="px-8 text-lg font-medium text-slate-500">
-                <Text label={"Contact"} value={"9662517364"} />
+                <Text label={"Contact"} value={patientDetails?.phoneNumber} />
               </div>
               <div className="px-8 text-lg font-medium text-slate-500">
-                <Text label={"Aadhar-card"} value={"8001-2511-2015"} />
+                <Text label={"Aadhar-card"} value={patientDetails?.aadhar} />
               </div>
               <div className="px-8 text-lg font-medium text-slate-500">
-                <Text label={"Birthdate"} value={"12 March 2003"} />
+                <Text label={"Birth Date"} value={patientDetails?.birthDate} />
               </div>
             </div>
           </>

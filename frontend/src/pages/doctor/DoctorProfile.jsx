@@ -35,7 +35,6 @@ const DoctorProfile = ({ user }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setDoctor(data);
       })
       .catch((error) => {

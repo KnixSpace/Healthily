@@ -67,6 +67,7 @@ public class PatientsService {
         patients.setBirthDate(savePatientDataDTO.getBirthDate());
         patients.setBloodGroup(savePatientDataDTO.getBlood() + savePatientDataDTO.getBloodGroup());
         patients.setAadhar(savePatientDataDTO.getAadhar());
+        patients.setProfileImg(savePatientDataDTO.getProfileImg());
 
         Address address = new Address();
 

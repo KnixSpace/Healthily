@@ -32,7 +32,11 @@ const ProfileForm = ({ user, checkPatient }) => {
   ];
 
   const onSubmit = (data) => {
-    const profileData = { ...data, email: user?.email };
+    const profileData = {
+      ...data,
+      email: user?.email,
+      profileImg: user?.image,
+    };
 
     fetch("http://localhost:8080/healthily/api/patient/savePatient", {
       method: "POST",
@@ -247,7 +251,7 @@ const ProfileForm = ({ user, checkPatient }) => {
           />
           <Field
             type="text"
-            name="house"
+            name="houseNo"
             label="House/Flat No"
             register={register}
             requiredMessage="required"

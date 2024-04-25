@@ -7,6 +7,7 @@ import com.hms.backend.dto.doctorDTO.GetAvailableDoctorDTO;
 import com.hms.backend.entities.Appointment;
 import com.hms.backend.entities.Doctors;
 import com.hms.backend.services.DoctorService;
+import com.hms.backend.services.UserService;
 import com.hms.backend.utils.FindDoctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ import java.util.List;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private UserService userService;
     @PostMapping("/check")
     public ResponseEntity<String> checkDoctor(@RequestBody CheckDoctorDTO requestDTO) {
         String email = requestDTO.getEmail();
@@ -47,6 +51,8 @@ public class DoctorController {
     public void deleteDoctor(@RequestBody Doctors doctors) {
 
         doctorService.deleteDoctor(doctors.getEmail());
+        userService.deleteDoctor(doctors.getEmail());
+
     }
     @PostMapping("/allAppointment")
     public List<AppointmentDTO> allAppointment(@RequestBody AppointmentDTO appointmentDTO){

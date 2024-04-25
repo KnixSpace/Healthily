@@ -44,4 +44,9 @@ public class UserService {
             throw new RuntimeException(e);
         }
     }
+    public void deleteDoctor(String email){
+
+        userRepository.deleteByEmail(email);
+
+    }
 }

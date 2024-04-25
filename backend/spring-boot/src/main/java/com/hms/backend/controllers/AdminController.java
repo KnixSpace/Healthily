@@ -4,10 +4,10 @@ import com.hms.backend.dto.appointmentDTO.AppointmentDTO;
 import com.hms.backend.dto.doctorDTO.AddDoctorDTO;
 import com.hms.backend.dto.doctorDTO.DoctorDTO;
 import com.hms.backend.entities.Appointment;
+import com.hms.backend.entities.Doctors;
+import com.hms.backend.entities.Patients;
 import com.hms.backend.entities.Users;
-import com.hms.backend.services.AdminService;
-import com.hms.backend.services.AppointmentService;
-import com.hms.backend.services.UserService;
+import com.hms.backend.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
-
 
     @Value("${http://localhost:5173}")
     private String frontendUrl;
@@ -48,6 +48,15 @@ public class AdminController {
         user.setRole("DOCTOR");
         userService.saveUser(user);
         return ResponseEntity.ok("Email sent successfully");
+    }
+    @GetMapping("/allDoctor")
+    public List<Doctors> allDoctor(){
+        return adminService.allDoctors();
+    }
+
+    @GetMapping("/allPatient")
+    public List<Patients> allPatient(){
+        return adminService.allPatient();
     }
 
     @GetMapping("/allAppointment")
