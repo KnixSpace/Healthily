@@ -31,11 +31,8 @@ const ProfileForm = ({ user, checkPatient }) => {
     { value: "rajeshthan", label: "Rajeshthan" },
   ];
 
-  const [userProfile, setUserProfile] = useState(null);
-
   const onSubmit = (data) => {
     const profileData = { ...data, email: user?.email };
-    setUserProfile(profileData);
 
     fetch("http://localhost:8080/healthily/api/patient/savePatient", {
       method: "POST",
