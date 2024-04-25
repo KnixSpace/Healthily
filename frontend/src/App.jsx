@@ -8,6 +8,8 @@ import AddDoctor from "./pages/admin/addDoctor/AddDoctor";
 import AllAppointments from "./pages/allAppointments/AllAppointments";
 import UpcomingAppointment from "./pages/upcomingAppointment/UpcomingAppointment";
 import Doctor from "./pages/doctor/Doctor";
+import AllDoctors from "./pages/admin/AllDoctors";
+import ALLPatient from "./pages/admin/ALLPatient";
 
 function App() {
   const location = useLocation();
@@ -67,7 +69,7 @@ function App() {
           }
         >
           <Route path="" element={<UpcomingAppointment user={user} />} />
-          <Route path="new" element={<NewAppoint user={user}/>} />
+          <Route path="new" element={<NewAppoint user={user} />} />
           <Route
             path="appointments"
             element={<AllAppointments user={user} />}
@@ -101,6 +103,8 @@ function App() {
             path="appointments"
             element={<AllAppointments user={user} />}
           />
+          <Route path="doctors" element={<AllDoctors />} />
+          <Route path="patients" element={<ALLPatient />} />
         </Route>
       </Routes>
     </>
