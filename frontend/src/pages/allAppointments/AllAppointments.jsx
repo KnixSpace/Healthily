@@ -12,56 +12,6 @@ const AllAppointments = ({ user }) => {
     setSelectedAppointment(null);
   };
 
-  // const dummyData = [
-  //   {
-  //     date: "23-04-15",
-  //     time: "12:00 PM",
-  //     title: "Annual Physical Exam",
-  //     status: "Scheduled",
-  //     doctorEmail: "doctor1@example.com",
-  //     patientEmail: "patient1@example.com",
-  //     doctorName: "Praharsh",
-  //     patientName: "Praharsh Patel",
-  //   },
-  //   {
-  //     date: "23-05-01",
-  //     time: "12:00 PM",
-  //     title: "Follow-up Appointment",
-  //     status: "Completed",
-  //     doctorEmail: "doctor2@example.com",
-  //     patientEmail: "patient2@example.com",
-  //     doctorName: "Praharsh",
-  //     patientName: "Praharsh Patel",
-  //   },
-  //   {
-  //     date: "23-06-10",
-  //     time: "12:00 PM",
-  //     title: "Consultation for Knee Pain",
-  //     status: "Scheduled",
-  //     doctorEmail: "doctor1@example.com",
-  //     patientEmail: "patient3@example.com",
-  //   },
-  //   {
-  //     date: "23-07-20",
-  //     time: "12:00 PM",
-  //     title: "Routine Checkup",
-  //     status: "Pending",
-  //     doctorEmail: "doctor3@example.com",
-  //     patientEmail: "patient4@example.com",
-  //   },
-  //   {
-  //     date: "23-08-05",
-  //     time: "12:00 PM",
-  //     title: "Flu Vaccination",
-  //     status: "Completed",
-  //     doctorEmail: "doctor2@example.com",
-  //     patientEmail: "patient1@example.com",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   setAppointments(dummyData);
-  // }, []);
-
   const fetchAppointments = async () => {
     let url;
     let method;
