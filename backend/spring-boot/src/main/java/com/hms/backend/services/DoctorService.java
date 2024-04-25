@@ -13,6 +13,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,5 +74,12 @@ public class DoctorService {
         }
         return getAvailableDoctorDTOS;
     }
+    public void deleteDoctor(String email) {
+        Optional<Doctors> optionalDoctor = Optional.ofNullable(doctorRepository.findByEmail(email));
+        if (optionalDoctor.isPresent()) {
+            doctorRepository.deleteByEmail(email);
 
+        }
+
+    }
 }

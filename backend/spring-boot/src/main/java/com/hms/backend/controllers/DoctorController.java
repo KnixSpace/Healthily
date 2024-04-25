@@ -33,12 +33,21 @@ public class DoctorController {
                     .body("Doctor with email " + email + " is not found in the database");
         }
     }
+    @PostMapping("/viewDoctor")
+    public Doctors viewProfile(@RequestBody Doctors doctors){
+        String email = doctors.getEmail();
+        return doctorService.checkDoc(email);
+    }
     @PostMapping("/saveDoctor")
     public ResponseEntity<String> saveDoctor(@RequestBody Doctors doctors){
         doctorService.saveDoc(doctors);
         return ResponseEntity.ok("Okay");
     }
+    @DeleteMapping("/deleteDoctor")
+    public void deleteDoctor(@RequestBody Doctors doctors) {
 
+        doctorService.deleteDoctor(doctors.getEmail());
+    }
     @PostMapping("/allAppointment")
     public List<AppointmentDTO> allAppointment(@RequestBody AppointmentDTO appointmentDTO){
         String doctorEmail = appointmentDTO.getDoctorEmail();

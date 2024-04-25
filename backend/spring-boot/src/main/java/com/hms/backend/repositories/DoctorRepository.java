@@ -13,4 +13,7 @@ public interface DoctorRepository extends MongoRepository<Doctors, String> {
 
     @Query("{ 'timeSlots': { $elemMatch: { 'day': ?0, 'time': ?1 } }, 'specialization':  ?2 , 'email': { $nin: ?3 } }")
     List<Doctors> findDoctorsByTimeSlotAndSpecializationAndEmailNotIn(String day, String time, String specializations, List<String> emailsToDiscard);
+
+    void deleteByEmail(String email);
+
 }
