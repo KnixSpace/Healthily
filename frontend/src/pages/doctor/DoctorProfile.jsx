@@ -21,7 +21,7 @@ const DoctorProfile = ({ user }) => {
   ];
 
   useEffect(() => {
-    fetch("", {
+    fetch("http://localhost:8080/healthily/api/doctor/viewDoctor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +35,7 @@ const DoctorProfile = ({ user }) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setDoctor(data);
       })
       .catch((error) => {
@@ -62,26 +63,22 @@ const DoctorProfile = ({ user }) => {
                 {user?.name}
               </div>
               <div className="px-8">
-                
-                <button
-                  // onClick={handelRemoveClick}
-                  className="px-8 py-2 rounded-md text-white bg-[#605bff]"
-                >
+                <button className="px-8 py-2 rounded-md text-white bg-[#605bff]">
                   Edit Profile
                 </button>
               </div>
             </div>
             <div className="px-8 text-2xl font-medium text-slate-500">
-              Orthologist
+              {doctor?.specialization}
             </div>
             <div className="px-8 text-lg font-medium text-slate-500">
-              <Text label={"Email Id"} value={"kruplgp2003@gmail.com"} />
+              <Text label={"Email Id"} value={doctor?.email} />
             </div>
             <div className="px-8 text-lg font-medium text-slate-500">
-              <Text label={"Contact"} value={"9662517364"} />
+              <Text label={"Contact"} value={doctor?.contactNumber} />
             </div>
             <div className="px-8 text-lg font-medium text-slate-500">
-              <Text label={"Aadhar-card"} value={"1111-258-1421-9521"} />
+              <Text label={"Aadhar-card"} value={doctor?.aadhar} />
             </div>
           </div>
           <div className="mt-4 py-4 px-8 flex gap-3 w-full border-t-2">
@@ -97,25 +94,33 @@ const DoctorProfile = ({ user }) => {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-1 gap-1 justify-items-center">
-                {/* update this with map */}
-                <div>Monday</div>
-                {times.map((index, key) => (
-                  <div>
-                    {index && (
+              {doctor?.timeSlots?.map((timeSlot, key) => (
+                <>
+                  <div
+                    className="grid grid-cols-1 gap-1 justify-items-center"
+                    key={key}
+                  >
+                    <div className="capitalize">{timeSlot?.day}</div>
+                    {times.map((time, key) => (
                       <>
-                        <span className="material-symbols-rounded text-green-500">
-                          check
-                        </span>
+                        <div>
+                          {timeSlot?.time.includes(time) ? (
+                            <span className="material-symbols-rounded text-green-500">
+                              check
+                            </span>
+                          ) : (
+                            <>
+                              <span class="material-symbols-rounded">
+                                close
+                              </span>
+                            </>
+                          )}
+                        </div>
                       </>
-                    )}
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div>Tuesday</div>
-              <div>Wednesday</div>
-              <div>Thursday</div>
-              <div>Friday</div>
+                </>
+              ))}
             </div>
           </div>
         </div>
