@@ -11,6 +11,7 @@ import java.util.List;
 public interface AppointmentRepository extends MongoRepository<Appointment, ObjectId> {
     List<Appointment> findByDateAndTime(String date,String time);
 
+    @Query("{'date': {'$gte': ?0,'$lte': ?1}}")
     List<Appointment> findByDateBetween(String currentDate,String endDate);
 
     List<Appointment> findByDate(String date);
