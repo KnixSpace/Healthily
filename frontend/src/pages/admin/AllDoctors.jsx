@@ -135,12 +135,16 @@ const AllDoctors = () => {
               >
                 keyboard_backspace
               </span>
-              <div className="flex-grow">
+              <div className="flex-grow flex flex-col gap-2">
                 <div className="w-full bg-[#efeeff] h-[200px] overflow-hidden object-cover rounded-md">
                   <img src={backDrop} alt="" className="w-full" />
                 </div>
                 <div className="px-8">
-                  <img src={userImg} alt="" className="size-24 mt-[-5%]" />
+                  <img
+                    src={userImg}
+                    alt=""
+                    className="size-24 mt-[-5%] border-4 border-white rounded-full"
+                  />
                 </div>
                 <div className="px-8 pt-2 text-3xl font-semibold text-[#605bff]">
                   Krupal Patel
@@ -155,7 +159,7 @@ const AllDoctors = () => {
                   9662517364
                 </div>
               </div>
-              <div>
+              <div className="px-8">
                 <button
                   onClick={handelRemoveClick}
                   className="px-8 py-2 rounded-md text-white bg-red-500"

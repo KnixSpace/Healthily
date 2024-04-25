@@ -10,10 +10,13 @@ import UpcomingAppointment from "./pages/upcomingAppointment/UpcomingAppointment
 import Doctor from "./pages/doctor/Doctor";
 import AllDoctors from "./pages/admin/AllDoctors";
 import ALLPatient from "./pages/admin/ALLPatient";
+import AdminProfile from "./pages/admin/AdminProfile";
+import PatientProfile from "./pages/patient/PatientProfile";
+import DoctorProfile from "./pages/doctor/DoctorProfile";
 
 function App() {
   const location = useLocation();
-  const [user, setUser] = useState("l");
+  const [user, setUser] = useState();
   useEffect(() => {
     const getUser = () => {
       fetch("http://localhost:3000/auth/api/login/success", {
@@ -68,6 +71,7 @@ function App() {
             </PrivateRoute>
           }
         >
+          <Route path="profile" element={<PatientProfile user={user} />} />
           <Route path="" element={<UpcomingAppointment user={user} />} />
           <Route path="new" element={<NewAppoint user={user} />} />
           <Route
@@ -83,6 +87,7 @@ function App() {
             </PrivateRoute>
           }
         >
+          <Route path="profile" element={<DoctorProfile user={user} />} />
           <Route path="" element={<UpcomingAppointment user={user} />} />
           <Route
             path="appointments"
@@ -97,6 +102,7 @@ function App() {
             </PrivateRoute>
           }
         >
+          <Route path="profile" element={<AdminProfile />} />
           <Route path="addDoctor" element={<AddDoctor />} />
           <Route path="" element={<UpcomingAppointment user={user} />} />
           <Route

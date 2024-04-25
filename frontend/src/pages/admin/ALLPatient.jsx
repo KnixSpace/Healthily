@@ -86,7 +86,7 @@ const ALLPatient = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className="h-[20%] overflow-auto my-4">
+            <div className="h-[80%] overflow-auto my-4">
               <div className="grid grid-cols-3 gap-4">
                 {filteredPatients.map((patient, index) => (
                   <div
@@ -124,7 +124,11 @@ const ALLPatient = () => {
                 <img src={backDrop} alt="" className="w-full" />
               </div>
               <div className="px-8">
-                <img src={userImg} alt="" className="size-24 mt-[-5%]" />
+                <img
+                  src={userImg}
+                  alt=""
+                  className="size-24 mt-[-5%] border-4 border-white rounded-full"
+                />
               </div>
               <div className="px-8 pt-2 text-3xl font-semibold text-[#605bff]">
                 Krupal Patel
