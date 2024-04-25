@@ -1,8 +1,17 @@
 import "./form.css";
-const Radio = ({ name, group, label, register, value, requiredMessage }) => {
+const Radio = ({
+  name,
+  group,
+  label,
+  register,
+  value,
+  requiredMessage,
+  checked,
+}) => {
   return (
     <div>
       <input
+        checked={checked}
         type="radio"
         name={group}
         id={name}

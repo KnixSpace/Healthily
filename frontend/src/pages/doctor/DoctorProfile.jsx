@@ -45,9 +45,6 @@ const DoctorProfile = ({ user }) => {
   return (
     <>
       <div className="h-full overflow-auto">
-        <div className="text-center p-2 mb-2 text-2xl text-[#605BFF] font-medium border-b-2">
-          Profile
-        </div>
         <div className="flex flex-col h-[90%] overflow-auto">
           <div className="w-full bg-[#efeeff] h-[200px] overflow-hidden object-cover rounded-md shrink-0">
             <img src={backDrop} alt="" className="w-full" />
@@ -65,6 +62,7 @@ const DoctorProfile = ({ user }) => {
                 {user?.name}
               </div>
               <div className="px-8">
+                
                 <button
                   // onClick={handelRemoveClick}
                   className="px-8 py-2 rounded-md text-white bg-[#605bff]"
