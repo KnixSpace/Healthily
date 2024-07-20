@@ -53,7 +53,7 @@ const Doctor = ({ user }) => {
             </>
           }
         />
-        <footer>Footer</footer>
+        <footer className="w-full text-center font-semibold py-1">© Copyright 2024 Healthily</footer>
       </div>
     </>
   );

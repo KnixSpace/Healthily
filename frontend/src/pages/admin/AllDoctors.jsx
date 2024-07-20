@@ -124,7 +124,7 @@ const AllDoctors = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className="h-[20%] overflow-auto my-4">
+            <div className="h-[80%] overflow-auto my-4">
               <div className="grid grid-cols-3 gap-4">
                 {filteredDoctors.map((doctor, index) => (
                   <div

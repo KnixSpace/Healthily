@@ -1,4 +1,10 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  redirect,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Home from "./pages/home/Home";
 import { useEffect, useState } from "react";
 import Patient from "./pages/patient/Patient";
@@ -44,6 +50,11 @@ function App() {
 
   return (
     <>
+      <a href="http://localhost:5173" target="_blank"
+        className="p-0 absolute bottom-10 right-16 size-14 bg-[#605bff] flex justify-center items-center rounded-xl cursor-pointer"
+      >
+        <span class="material-symbols-rounded text-3xl text-white">chat</span>
+      </a>
       <Routes location={location} key={location.pathname}>
         <Route
           path="/"

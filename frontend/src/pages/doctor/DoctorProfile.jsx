@@ -45,7 +45,7 @@ const DoctorProfile = ({ user }) => {
   return (
     <>
       <div className="h-full overflow-auto">
-        <div className="flex flex-col h-[90%] overflow-auto">
+        <div className="flex flex-col h-full overflow-auto">
           <div className="w-full bg-[#efeeff] h-[200px] overflow-hidden object-cover rounded-md shrink-0">
             <img src={backDrop} alt="" className="w-full" />
           </div>

@@ -49,7 +49,7 @@ const Appointment = ({ role, appointments, onClick }) => {
           </div>
         ))}
       </div>
-      <div className="h-[78%] overflow-auto">
+      <div className="h-[75%] overflow-auto">
         {appointments.map((appointment, index) => (
           <div
             key={index}
