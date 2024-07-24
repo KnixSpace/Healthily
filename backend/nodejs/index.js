@@ -46,7 +46,7 @@ app.get("/home", (req, res) => {
 });
 
 app.use("/auth", login);
-
+//Network establishment
 const PORT = 3000 || process.env.PORT;
 mongoose
   .connect(process.env.MONGO_CONNECTION_STRING)
